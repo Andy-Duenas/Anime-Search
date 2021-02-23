@@ -36,3 +36,18 @@ header,
 .background-color {
   background-color: #8cb3e6;
 }
+
+@media screen and (min-width: 1024px) {
+  .menu-button {
+    font-size: 100%;
+  }
+
+  .title {
+    font-size: 30px;
+    margin: 1rem 0;
+  }
+
+  /* .column-full {
+    font-size: 1%;
+  } */
+}
