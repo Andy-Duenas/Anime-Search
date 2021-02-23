@@ -5,6 +5,12 @@
 .container {
   width: 100%;
   height: 100%;
+
+  /* background-image: url(https://wallpapercave.com/wp/wp5321869.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 
 .row {
@@ -21,21 +27,37 @@
 
 .column-full {
   width: 100%;
+  height: 100%;
+}
+
+.column-half-h {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.input-bar {
+  width: 70%;
+  height: 35%;
+}
+
+.search-button {
+  width: 22%;
+  height: 35%;
 }
 
 .button-row {
   display: flex;
   justify-content: space-evenly;
+  height: 100%;
   margin-bottom: 10px;
 }
 
-.search-bar {
-  text-align: right;
-}
-
-.column-top-half {
-  width: 50%;
-  margin-bottom: 10px;
+.column-title {
+  width: 100%;
+  height: 100%;
+  margin: 0 10px;
   padding: 0 6px;
 }
 
@@ -52,9 +74,21 @@
   height: 100%;
 }
 
+.anime-title {
+  margin: 0;
+  padding: 0;
+}
+
 .img-container {
+  position: relative;
   width: 100%;
   height: 100%;
+}
+
+.favorite-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
 img {
