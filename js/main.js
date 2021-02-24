@@ -35,16 +35,25 @@ getTopRated(3, 4);
 function setRandomGenreRank(anime, index) {
   var genreList = 'Genre: ';
   for (var i = 0; i < anime.genres.length; i++) {
-    genreList += ' ' + anime.genres[i].name + ',';
+    if (i + 1 < anime.genres.length) {
+      genreList += ' ' + anime.genres[i].name + ',';
+    } else {
+      genreList += ' ' + anime.genres[i].name;
+    }
   }
   $randomRank[index].textContent = 'Rank: ' + anime.rank;
   $randomGenre[index].textContent = genreList;
+
 }
 
 function setTopGenreRank(anime, index) {
   var genreList = 'Genre: ';
   for (var i = 0; i < anime.genres.length; i++) {
-    genreList += ' ' + anime.genres[i].name + ',';
+    if (i + 1 < anime.genres.length) {
+      genreList += ' ' + anime.genres[i].name + ',';
+    } else {
+      genreList += ' ' + anime.genres[i].name;
+    }
   }
   $topRatedRank[index].textContent = 'Rank: ' + anime.rank;
   $topRatedGenre[index].textContent = genreList;
