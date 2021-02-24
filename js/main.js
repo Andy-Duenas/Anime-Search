@@ -1,14 +1,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
 
-var $topRatedImgs = document.querySelectorAll('.top-rated');
-var $topRatedTitles = document.querySelectorAll('.anime-title-top');
-var $randomTitle = document.querySelectorAll('.anime-title');
-var $randomImgs = document.querySelectorAll('.four-rand-imgs');
-var $topRatedGenre = document.querySelectorAll('.top-genre');
-var $topRatedRank = document.querySelectorAll('.top-rank');
-var $randomRank = document.querySelectorAll('.random-rank');
-var $randomGenre = document.querySelectorAll('.random-genre');
+var $topMainList = document.querySelector('.top-list');
+var $randomMainList = document.querySelector('.random-list');
 var $homeButton = document.querySelector('.home-button');
 var $randomButton = document.querySelector('.random-button');
 
@@ -17,20 +11,23 @@ function getTopRated(numOfTop, numOfRand) {
   xhr.open('GET', 'https://api.jikan.moe/v3/top/anime');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    setTopRated(xhr.response.top, numOfTop);
-    var arrayOfRandomAnime = getRandomAnime(xhr.response.top, numOfRand);
-    setRandomAnime(arrayOfRandomAnime, numOfRand);
+    if (numOfTop !== 0) {
+      setTopRated(xhr.response.top, numOfTop);
+    }
+    if (numOfRand !== 0) {
+      var arrayOfRandomAnime = getRandomAnime(xhr.response.top, numOfRand);
+      setRandomAnime(arrayOfRandomAnime, numOfRand);
+    }
   });
   xhr.send();
 }
 
-function getAnime(id, index, type) {
+function getAnime(id, index, type, objForTree) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.jikan.moe/v3/anime/' + id);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    if (type === 'topAnime') { setTopGenreRank(xhr.response, index); }
-    if (type === 'ranAnime') { setRandomGenreRank(xhr.response, index); }
+    setGenreRank(xhr.response, index, objForTree, type);
   });
   xhr.send();
 }
@@ -40,7 +37,7 @@ if (info.page === 'home') {
   console.log('hi');
 }
 
-function setRandomGenreRank(anime, index) {
+function setGenreRank(anime, index, objForTree, type) {
   var genreList = 'Genre: ';
   for (var i = 0; i < anime.genres.length; i++) {
     if (i + 1 < anime.genres.length) {
@@ -49,36 +46,81 @@ function setRandomGenreRank(anime, index) {
       genreList += ' ' + anime.genres[i].name;
     }
   }
-  $randomRank[index].textContent = 'Rank: ' + anime.rank;
-  $randomGenre[index].textContent = genreList;
+  objForTree.rank = 'Rank: ' + anime.rank;
+  objForTree.genre = genreList;
+  console.log(objForTree, type);
+  var topOfTree = treeMaker(objForTree, type);
+  if (type === 'topAnime') { $topMainList.appendChild(topOfTree); }
+  if (type === 'ranAnime') { $randomMainList.appendChild(topOfTree); }
 }
 
-function setTopGenreRank(anime, index) {
-  var genreList = 'Genre: ';
-  for (var i = 0; i < anime.genres.length; i++) {
-    if (i + 1 < anime.genres.length) {
-      genreList += ' ' + anime.genres[i].name + ',';
-    } else {
-      genreList += ' ' + anime.genres[i].name;
-    }
+function treeMaker(obj, type) {
+  var firstcol = document.createElement('div');
+  var imgContainer = document.createElement('div');
+
+  firstcol.appendChild(imgContainer);
+  var star = document.createElement('i');
+
+  star.setAttribute('class', 'favorite-icon fas fa-star');
+  imgContainer.appendChild(star);
+
+  var img = document.createElement('img');
+  img.setAttribute('alt', 'anime-img');
+  img.setAttribute('src', obj.url);
+  imgContainer.appendChild(img);
+
+  var colInfo = document.createElement('div');
+  colInfo.setAttribute('class', 'column-info');
+  firstcol.appendChild(colInfo);
+
+  var title = document.createElement('h4');
+  title.textContent = obj.title;
+  colInfo.appendChild(title);
+
+  var rank = document.createElement('h4');
+  rank.textContent = obj.rank;
+  colInfo.appendChild(rank);
+
+  var genre = document.createElement('h4');
+  genre.textContent = obj.genre;
+  colInfo.appendChild(genre);
+
+  if (type === 'topAnime') {
+    firstcol.setAttribute('class', 'column-one-third');
+    imgContainer.setAttribute('class', 'img-container');
+    img.setAttribute('class', 'top-rated');
+    title.setAttribute('class', 'anime-title-top');
+    rank.setAttribute('class', 'top-rank');
+    genre.setAttribute('class', 'top-genre');
   }
-  $topRatedRank[index].textContent = 'Rank: ' + anime.rank;
-  $topRatedGenre[index].textContent = genreList;
+
+  if (type === 'ranAnime') {
+    firstcol.setAttribute('class', 'column-half');
+    imgContainer.setAttribute('class', 'img-container big-img');
+    img.setAttribute('class', 'four-rand-imgs');
+    title.setAttribute('class', 'anime-title');
+    rank.setAttribute('class', 'random-rank');
+    genre.setAttribute('class', 'random-genre');
+  }
+
+  return firstcol;
 }
 
 function setTopRated(animeList, amount) {
   for (var i = 0; i < amount; i++) {
-    getAnime(animeList[i].mal_id, i, 'topAnime');
-    $topRatedImgs[i].setAttribute('src', animeList[i].image_url);
-    $topRatedTitles[i].textContent = animeList[i].title;
+    var obj = {};
+    obj.url = animeList[i].image_url;
+    obj.title = animeList[i].title;
+    getAnime(animeList[i].mal_id, i, 'topAnime', obj);
   }
 }
 
 function setRandomAnime(animeList, amount) {
   for (var i = 0; i < amount; i++) {
-    getAnime(animeList[i].mal_id, i, 'ranAnime');
-    $randomImgs[i].setAttribute('src', animeList[i].image_url);
-    $randomTitle[i].textContent = animeList[i].title;
+    var obj = {};
+    obj.url = animeList[i].image_url;
+    obj.title = animeList[i].title;
+    getAnime(animeList[i].mal_id, i, 'ranAnime', obj);
   }
 }
 
