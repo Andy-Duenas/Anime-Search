@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
+
 var $topRatedImgs = document.querySelectorAll('.top-rated');
 var $topRatedTitles = document.querySelectorAll('.anime-title-top');
 var $randomTitle = document.querySelectorAll('.anime-title');
@@ -6,6 +9,8 @@ var $topRatedGenre = document.querySelectorAll('.top-genre');
 var $topRatedRank = document.querySelectorAll('.top-rank');
 var $randomRank = document.querySelectorAll('.random-rank');
 var $randomGenre = document.querySelectorAll('.random-genre');
+var $homeButton = document.querySelector('.home-button');
+var $randomButton = document.querySelector('.random-button');
 
 function getTopRated(numOfTop, numOfRand) {
   var xhr = new XMLHttpRequest();
@@ -29,8 +34,11 @@ function getAnime(id, index, type) {
   });
   xhr.send();
 }
-
-getTopRated(3, 4);
+if (info.page === 'home') {
+  getTopRated(3, 4);
+} else if (info.page === 'random') {
+  console.log('hi');
+}
 
 function setRandomGenreRank(anime, index) {
   var genreList = 'Genre: ';
@@ -83,3 +91,15 @@ function getRandomAnime(animeList, numOfAnime) {
   }
   return arrayOfRandomAnime;
 }
+
+function handleHomeButton(event) {
+  info.page = 'home';
+}
+
+$homeButton.addEventListener('click', handleHomeButton);
+
+function handleRandomButton(event) {
+  info.page = 'random';
+}
+
+$randomButton.addEventListener('click', handleRandomButton);
