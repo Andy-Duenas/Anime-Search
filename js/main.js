@@ -1,49 +1,75 @@
 /* eslint-disable no-console */
-
 var $topRatedImgs = document.querySelectorAll('.top-rated');
 var $topRatedTitles = document.querySelectorAll('.anime-title-top');
-var $fourRandomTitle = document.querySelectorAll('.anime-title');
-var $fourRandomImgs = document.querySelectorAll('.four-rand-imgs');
+var $randomTitle = document.querySelectorAll('.anime-title');
+var $randomImgs = document.querySelectorAll('.four-rand-imgs');
+var $topRatedGenre = document.querySelectorAll('.top-genre');
+var $topRatedRank = document.querySelectorAll('.top-rank');
+var $randomRank = document.querySelectorAll('.random-rank');
+var $randomGenre = document.querySelectorAll('.random-genre');
 
-function getTopRated() {
+function getTopRated(numOfTop, numOfRand) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.jikan.moe/v3/top/anime');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log('status', xhr.status);
-    console.log('List', xhr.response);
-    setTopRatedImgs(xhr.response.top);
-    var arrayOfRandomAnime = setRandomAnime(xhr.response.top, 4);
-    setFourRandomAnime(arrayOfRandomAnime);
+    console.log(xhr.response);
+    setTopRated(xhr.response.top, numOfTop);
+    var arrayOfRandomAnime = getRandomAnime(xhr.response.top, numOfRand);
+    setRandomAnime(arrayOfRandomAnime, numOfRand);
   });
   xhr.send();
 }
 
-getTopRated();
-
-function setTopRatedImgs(AnimeList) {
-  $topRatedImgs[0].setAttribute('src', AnimeList[0].image_url);
-  $topRatedImgs[1].setAttribute('src', AnimeList[1].image_url);
-  $topRatedImgs[2].setAttribute('src', AnimeList[2].image_url);
-  $topRatedTitles[0].textContent = AnimeList[0].title;
-  $topRatedTitles[1].textContent = AnimeList[1].title;
-  $topRatedTitles[2].textContent = AnimeList[2].title;
+function getAnime(id, index, type) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.jikan.moe/v3/anime/' + id);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    if (type === 'topAnime') { setTopGenreRank(xhr.response, index); }
+    if (type === 'ranAnime') { setRandomGenreRank(xhr.response, index); }
+  });
+  xhr.send();
 }
 
-function setFourRandomAnime(AnimeList) {
-  $fourRandomImgs[0].setAttribute('src', AnimeList[0].image_url);
-  $fourRandomImgs[1].setAttribute('src', AnimeList[1].image_url);
-  $fourRandomImgs[2].setAttribute('src', AnimeList[2].image_url);
-  $fourRandomImgs[3].setAttribute('src', AnimeList[3].image_url);
-  $fourRandomTitle[0].textContent = AnimeList[0].title;
-  $fourRandomTitle[1].textContent = AnimeList[1].title;
-  $fourRandomTitle[2].textContent = AnimeList[2].title;
-  $fourRandomTitle[3].textContent = AnimeList[3].title;
+getTopRated(3, 4);
+
+function setRandomGenreRank(anime, index) {
+  var genreList = 'Genre: ';
+  for (var i = 0; i < anime.genres.length; i++) {
+    genreList += ' ' + anime.genres[i].name + ',';
+  }
+  $randomRank[index].textContent = 'Rank: ' + anime.rank;
+  $randomGenre[index].textContent = genreList;
 }
 
-function setRandomAnime(animeList, numOfAnime) {
+function setTopGenreRank(anime, index) {
+  var genreList = 'Genre: ';
+  for (var i = 0; i < anime.genres.length; i++) {
+    genreList += ' ' + anime.genres[i].name + ',';
+  }
+  $topRatedRank[index].textContent = 'Rank: ' + anime.rank;
+  $topRatedGenre[index].textContent = genreList;
+}
+
+function setTopRated(animeList, amount) {
+  for (var i = 0; i < amount; i++) {
+    getAnime(animeList[i].mal_id, i, 'topAnime');
+    $topRatedImgs[i].setAttribute('src', animeList[i].image_url);
+    $topRatedTitles[i].textContent = animeList[i].title;
+  }
+}
+
+function setRandomAnime(animeList, amount) {
+  for (var i = 0; i < amount; i++) {
+    getAnime(animeList[i].mal_id, i, 'ranAnime');
+    $randomImgs[i].setAttribute('src', animeList[i].image_url);
+    $randomTitle[i].textContent = animeList[i].title;
+  }
+}
+
+function getRandomAnime(animeList, numOfAnime) {
   var arrayOfRandomAnime = [];
-
   for (var i = 0; i < numOfAnime; i++) {
     var a = Math.random() * 50;
     a = Math.floor(a);

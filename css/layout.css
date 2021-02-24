@@ -9,13 +9,11 @@
 .row {
   display: flex;
   width: 100%;
-  height: 100%;
   text-align: center;
 }
 
 .column-full {
   width: 100%;
-  height: 100%;
 }
 
 .column-half-h {
@@ -38,11 +36,13 @@
 .button-row {
   display: flex;
   justify-content: space-evenly;
-  height: 100%;
   margin-bottom: 10px;
 }
 
-.synopsis {
+.top-rank,
+.top-genre,
+.random-rank,
+.random-genre {
   display: none;
 }
 
@@ -58,9 +58,10 @@
 }
 
 .column-half {
+  text-align: center;
   width: 50%;
-  padding: 15px;
   height: 100%;
+  padding: 15px;
 }
 
 .wrap-row {
@@ -71,7 +72,6 @@
 .anime-title,
 .anime-title-top {
   margin: 0;
-  padding: 0;
 }
 
 .img-container {
@@ -87,15 +87,15 @@
 }
 
 img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
-@media screen and (min-width: 1024px) {
-  /* .container {
+@media screen and (min-width: 768px) {
+  .container {
+    width: 75vw;
     margin: auto;
-    width: 75%;
-  } */
+  }
 
   .input-bar {
     width: 30%;
@@ -106,8 +106,20 @@ img {
     width: 6%;
   }
 
-  .synopsis {
+  .top-rank,
+  .top-genre,
+  .random-rank,
+  .random-genre,
+  .anime-title,
+  .anime-title-top {
     display: flex;
+    text-align: left;
+  }
+
+  .column-info {
+    text-align: left;
+    width: 50%;
+    padding: 0 1rem;
   }
 
   .column-one-third,
@@ -116,7 +128,7 @@ img {
   }
 
   .img-container {
-    width: 50%;
-    height: 50%;
+    width: 200px;
+    height: 280px;
   }
 }
