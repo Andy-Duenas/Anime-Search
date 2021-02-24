@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 var $topRatedImgs = document.querySelectorAll('.top-rated');
 var $topRatedTitles = document.querySelectorAll('.anime-title-top');
 var $randomTitle = document.querySelectorAll('.anime-title');
@@ -13,7 +12,6 @@ function getTopRated(numOfTop, numOfRand) {
   xhr.open('GET', 'https://api.jikan.moe/v3/top/anime');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log(xhr.response);
     setTopRated(xhr.response.top, numOfTop);
     var arrayOfRandomAnime = getRandomAnime(xhr.response.top, numOfRand);
     setRandomAnime(arrayOfRandomAnime, numOfRand);
