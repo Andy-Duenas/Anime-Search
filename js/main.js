@@ -43,7 +43,6 @@ function setRandomGenreRank(anime, index) {
   }
   $randomRank[index].textContent = 'Rank: ' + anime.rank;
   $randomGenre[index].textContent = genreList;
-
 }
 
 function setTopGenreRank(anime, index) {
@@ -78,7 +77,7 @@ function setRandomAnime(animeList, amount) {
 function getRandomAnime(animeList, numOfAnime) {
   var arrayOfRandomAnime = [];
   for (var i = 0; i < numOfAnime; i++) {
-    var a = Math.random() * 50;
+    var a = Math.random() * numOfAnime;
     a = Math.floor(a);
     arrayOfRandomAnime.push(animeList[a]);
   }
