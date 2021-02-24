@@ -4,15 +4,130 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin="anonymous"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-  </header>
-  <main>
-  </main>
+  <div class="container">
+    <header>
+      <div class="row">
+        <div class="column-half-h">
+          <h2 class="title">AnimeSearch</h2>
+        </div>
+        <div class="column-half-h">
+          <input type="text" placeholder="Anime / Genre" class="input-bar">
+          <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-full button-row">
+          <button type="button" class="menu-button">Home</button>
+          <button type="button" class="menu-button">Top Rated</button>
+          <button type="button" class="menu-button">Random</button>
+          <button type="button" class="menu-button">My List</button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="row">
+        <div class="column-full">
+          <h2>Top 3 Anime</h2>
+        </div>
+      </div>
+      <div class="row background-color">
+        <div class="column-one-third">
+          <div class="img-container">
+            <i class="favorite-icon fas fa-star"></i>
+            <img class="top-rated" alt="anime-img">
+          </div>
+          <div class="column-info">
+            <h4 class="anime-title-top"></h4>
+            <h4 class="top-rank"></h4>
+            <h4 class="top-genre"></h4>
+          </div>
+        </div>
+        <div class="column-one-third">
+          <div class="img-container">
+            <i class="favorite-icon fas fa-star"></i>
+            <img alt="anime-img" class="top-rated">
+          </div>
+          <div class="column-info">
+            <h4 class="anime-title-top"></h4>
+            <h4 class="top-rank"></h4>
+            <h4 class="top-genre"></h4>
+          </div>
+        </div>
+        <div class="column-one-third">
+          <div class="img-container">
+            <i class="favorite-icon fas fa-star"></i>
+            <img class="top-rated" alt="anime-img">
+          </div>
+          <div class="column-info">
+            <h4 class="anime-title-top"></h4>
+            <h4 class="top-rank"></h4>
+            <h4 class="top-genre"></h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-full">
+          <h2>Random</h2>
+        </div>
+      </div>
+      <div class="row wrap-row background-color">
+        <div class="column-half">
+          <div class="img-container big-img">
+            <i class="favorite-icon fas fa-star"></i>
+            <img alt="anime-img" class="four-rand-imgs">
+          </div>
+          <div class="column-info">
+            <h3 class="anime-title"></h3>
+            <h4 class="random-rank"></h4>
+            <h4 class="random-genre"></h4>
+          </div>
+        </div>
+        <div class="column-half">
+          <div class="img-container big-img">
+            <i class="favorite-icon fas fa-star"></i>
+            <img alt="anime-img" class="four-rand-imgs">
+          </div>
+          <div class="column-info">
+            <h3 class="anime-title"></h3>
+            <h4 class="random-rank"></h4>
+            <h4 class="random-genre"></h4>
+          </div>
+        </div>
+        <div class="column-half">
+          <div class="img-container big-img">
+            <i class="favorite-icon fas fa-star"></i>
+            <img alt="anime-img" class="four-rand-imgs">
+          </div>
+          <div class="column-info">
+            <h3 class="anime-title"></h3>
+            <h4 class="random-rank"></h4>
+            <h4 class="random-genre"></h4>
+          </div>
+        </div>
+        <div class="column-half">
+          <div class="img-container big-img">
+            <i class="favorite-icon fas fa-star"></i>
+            <img alt="anime-img" class="four-rand-imgs">
+          </div>
+          <div class="column-info">
+            <h3 class="anime-title"></h3>
+            <h4 class="random-rank"></h4>
+            <h4 class="random-genre"></h4>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>

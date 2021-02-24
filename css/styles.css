@@ -1,0 +1,49 @@
+body {
+  font-family: 'Philosopher', sans-serif;
+}
+
+header,
+.background-color {
+  font-family: 'Philosopher', sans-serif;
+  font-style: italic;
+  background-color: #68a9ff;
+}
+
+.input-bar,
+.search-button {
+  border-radius: 4px;
+  border: solid black 1px;
+}
+
+.menu-button,
+.input-bar,
+.search-button {
+  cursor: pointer;
+  outline: none;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  transition: border-bottom 0.3s;
+  font-weight: bold;
+}
+
+.menu-button:hover {
+  border-bottom: solid 1px black;
+}
+
+.background-color {
+  background-color: #8cb3e6;
+}
+
+@media screen and (min-width: 1024px) {
+  .menu-button {
+    font-size: 100%;
+  }
+
+  .title {
+    font-size: 30px;
+    margin: 1rem 0;
+  }
+}
