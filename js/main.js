@@ -1,10 +1,42 @@
+/* eslint-disable no-console */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
-var genreList = ['action', 'adventure', 'cars',
-  'comedy', 'dementia', 'demons', 'mystery', 'drama', 'ecchi', 'fantasy', 'game', 'hentai',
-  'historical', 'horror', 'kids', 'magic', 'martial arts', 'mecha', 'music', 'parody', 'samurai',
-  'romance', 'school', 'sci fi', 'shoujo', 'shoujo ai:', 'shounen', 'shounen ai:', 'space', 'sports', 'super powers',
-  'vampire', 'yaoi', 'yuri', 'harem', 'slice of life', 'supernatural', 'military', 'police', 'psychological', 'thriller', 'harem', 'seinen', 'josei'];
+var genreList = {
+  action: 1,
+  adventure: 2,
+  cars: 3,
+  comedy: 4,
+  dementia: 5,
+  demons: 6,
+  mystery: 7,
+  drama: 8,
+  fantasy: 10,
+  game: 11,
+  historical: 13,
+  horror: 14,
+  kids: 15,
+  magic: 16,
+  martialarts: 17,
+  mecha: 18,
+  music: 19,
+  parody: 20,
+  samurai: 21,
+  romance: 22,
+  school: 23,
+  scifi: 24,
+  shoujo: 25,
+  shounen: 27,
+  space: 29,
+  sports: 30,
+  superpowers: 31,
+  vampire: 32,
+  sliceoflife: 36,
+  supernatural: 37,
+  military: 38,
+  police: 39,
+  psychological: 40,
+  thriller: 41
+};
 
 var $topMainList = document.querySelector('.top-list');
 var $randomMainList = document.querySelector('.random-list');
@@ -232,30 +264,17 @@ $rankButton.addEventListener('click', handleRankButton);
 function checkListOfGenre(value) {
   var animeType = {};
   value = value.toLowerCase();
-  for (var i = 0; i < genreList.length; i++) {
-    if (value === genreList[i]) {
-      animeType.index = i + 1;
-      animeType.genre = capitalizeWords(genreList[i]);
-      animeType.isIn = true;
-      return animeType;
-    }
-  }
-  return false;
+  console.log(genreList[deleteSpaces(value)]);
+  animeType.genre = genreList[deleteSpaces(value)];
+  animeType.isIn = true;
+  return animeType;
+
 }
 
-function capitalizeWords(string) {
+function deleteSpaces(string) {
   var lowerCaseString = string.toLowerCase();
   var returnResult = '';
-  returnResult += string[0].toUpperCase();
-  for (var i = 1; i < string.length; i++) {
-    if (string[i] === ' ') {
-      returnResult += lowerCaseString[i].toUpperCase();
-      i++;
-      returnResult += lowerCaseString[i].toUpperCase();
-    } else {
-      returnResult += lowerCaseString[i];
-    }
-  }
+  returnResult = lowerCaseString.replace(/\s+/g, '');
   return returnResult;
 }
 
@@ -264,8 +283,8 @@ function handleSearchBar(event) {
   var genre = checkListOfGenre(event.srcElement[0].value);
   if (genre.isIn) {
     info.page = 'search';
-    checkPage(genre.genre);
-    searchAnime(genre.index, 'genre');
+    checkPage(event.srcElement[0].value);
+    searchAnime(genre.genre, 'genre');
   }
   $searchBar.reset();
 }
