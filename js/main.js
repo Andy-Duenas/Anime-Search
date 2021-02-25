@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
 var $topMainList = document.querySelector('.top-list');
 var $randomMainList = document.querySelector('.random-list');
@@ -162,9 +163,11 @@ function getRandomAnime(animeList, numOfAnime) {
 function checkPrevNum(array, a) {
   for (var i = 0; i < array.length; i++) {
     if (a === array[i].rank - 1) {
+
       return true;
     }
   }
+
   return false;
 }
 
