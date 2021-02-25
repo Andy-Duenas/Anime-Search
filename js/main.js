@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
-/* eslint-disable no-console */
-
 var $topMainList = document.querySelector('.top-list');
 var $randomMainList = document.querySelector('.random-list');
 var $homeButton = document.querySelector('.home-button');
 var $randomButton = document.querySelector('.random-button');
+var $topAnimeHeader = document.querySelector('.top-header');
+var $randomAnimeHeader = document.querySelector('.random-header');
 
 function getTopRated(numOfTop, numOfRand) {
   var xhr = new XMLHttpRequest();
@@ -22,6 +22,8 @@ function getTopRated(numOfTop, numOfRand) {
   xhr.send();
 }
 
+checkPage();
+
 function getAnime(id, index, type, objForTree) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.jikan.moe/v3/anime/' + id);
@@ -31,10 +33,27 @@ function getAnime(id, index, type, objForTree) {
   });
   xhr.send();
 }
-if (info.page === 'home') {
-  getTopRated(3, 4);
-} else if (info.page === 'random') {
-  console.log('hi');
+
+function checkPage() {
+  if (info.page === 'home') {
+    removeAllChildren($topMainList);
+    removeAllChildren($randomMainList);
+    $topAnimeHeader.className = 'top-header';
+    $randomAnimeHeader.className = 'random-header';
+    getTopRated(3, 4);
+  } else if (info.page === 'random') {
+    removeAllChildren($topMainList);
+    removeAllChildren($randomMainList);
+    $topAnimeHeader.className = 'hidden';
+    $randomAnimeHeader.className = 'random-header';
+    getTopRated(0, 10);
+  }
+}
+
+function removeAllChildren(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
 }
 
 function setGenreRank(anime, index, objForTree, type) {
@@ -48,7 +67,6 @@ function setGenreRank(anime, index, objForTree, type) {
   }
   objForTree.rank = 'Rank: ' + anime.rank;
   objForTree.genre = genreList;
-  console.log(objForTree, type);
   var topOfTree = treeMaker(objForTree, type);
   if (type === 'topAnime') { $topMainList.appendChild(topOfTree); }
   if (type === 'ranAnime') { $randomMainList.appendChild(topOfTree); }
@@ -126,22 +144,40 @@ function setRandomAnime(animeList, amount) {
 
 function getRandomAnime(animeList, numOfAnime) {
   var arrayOfRandomAnime = [];
-  for (var i = 0; i < numOfAnime; i++) {
-    var a = Math.random() * numOfAnime;
+  var isIN = false;
+
+  while (numOfAnime !== arrayOfRandomAnime.length) {
+    var a = Math.random() * animeList.length;
     a = Math.floor(a);
-    arrayOfRandomAnime.push(animeList[a]);
+
+    isIN = checkPrevNum(arrayOfRandomAnime, a);
+
+    if (isIN === false) {
+      arrayOfRandomAnime.push(animeList[a]);
+    }
   }
   return arrayOfRandomAnime;
 }
 
+function checkPrevNum(array, a) {
+  for (var i = 0; i < array.length; i++) {
+    if (a === array[i].rank - 1) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function handleHomeButton(event) {
   info.page = 'home';
+  checkPage();
 }
 
 $homeButton.addEventListener('click', handleHomeButton);
 
 function handleRandomButton(event) {
   info.page = 'random';
+  checkPage();
 }
 
 $randomButton.addEventListener('click', handleRandomButton);
