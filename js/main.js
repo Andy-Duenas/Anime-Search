@@ -1,5 +1,11 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
+var genreList = ['action', 'adventure', 'cars',
+  'comedy', 'dementia', 'demons', 'mystery', 'drama', 'ecchi', 'fantasy', 'game', 'hentai',
+  'historical', 'horror', 'kids', 'magic', 'martial arts', 'mecha', 'music', 'parody', 'samurai',
+  'romance', 'school', 'sci fi', 'shoujo', 'shoujo ai:', 'shounen', 'shounen ai:', 'space', 'sports', 'super powers',
+  'vampire', 'yaoi', 'yuri', 'harem', 'slice of life', 'supernatural', 'military', 'police', 'psychological', 'thriller', 'harem', 'seinen', 'josei'];
+
 var $topMainList = document.querySelector('.top-list');
 var $randomMainList = document.querySelector('.random-list');
 var $homeButton = document.querySelector('.home-button');
@@ -7,6 +13,9 @@ var $randomButton = document.querySelector('.random-button');
 var $rankButton = document.querySelector('.top-button');
 var $topAnimeHeader = document.querySelector('.top-header');
 var $randomAnimeHeader = document.querySelector('.random-header');
+var $searchBar = document.querySelector('form');
+
+checkPage();
 
 function getTopRated(numOfTop, numOfRand) {
   var xhr = new XMLHttpRequest();
@@ -24,8 +33,6 @@ function getTopRated(numOfTop, numOfRand) {
   xhr.send();
 }
 
-checkPage();
-
 function getAnime(id, index, type, objForTree) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.jikan.moe/v3/anime/' + id);
@@ -36,25 +43,48 @@ function getAnime(id, index, type, objForTree) {
   xhr.send();
 }
 
-function checkPage() {
+function searchAnime(searchFor, type) {
+  var xhr = new XMLHttpRequest();
+  if (type === 'genre') {
+    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=score&sort=desc');
+  }
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    setTopRated(xhr.response.results, 12);
+  });
+  xhr.send();
+}
+
+function checkPage(text) {
   if (info.page === 'home') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
+    $topAnimeHeader.textContent = 'Top Anime';
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'random-header';
     getTopRated(3, 4);
   } else if (info.page === 'random') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
+    $topAnimeHeader.textContent = 'Top Anime';
     $topAnimeHeader.className = 'hidden';
     $randomAnimeHeader.className = 'random-header';
     getTopRated(0, 12);
   } else if (info.page === 'rank') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
+    $topAnimeHeader.textContent = 'Top Anime';
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'hidden';
     getTopRated(12, 0);
+  }
+  if (info.page === 'search') {
+    removeAllChildren($topMainList);
+    removeAllChildren($randomMainList);
+    $topAnimeHeader.textContent = 'Search: ' + text;
+    $topAnimeHeader.className = 'top-header';
+    $randomAnimeHeader.className = 'hidden';
+    info.page = 'home';
   }
 }
 
@@ -198,3 +228,45 @@ function handleRankButton(event) {
 }
 
 $rankButton.addEventListener('click', handleRankButton);
+
+function checkListOfGenre(value) {
+  var animeType = {};
+  value = value.toLowerCase();
+  for (var i = 0; i < genreList.length; i++) {
+    if (value === genreList[i]) {
+      animeType.index = i + 1;
+      animeType.genre = capitalizeWords(genreList[i]);
+      animeType.isIn = true;
+      return animeType;
+    }
+  }
+  return false;
+}
+
+function capitalizeWords(string) {
+  var lowerCaseString = string.toLowerCase();
+  var returnResult = '';
+  returnResult += string[0].toUpperCase();
+  for (var i = 1; i < string.length; i++) {
+    if (string[i] === ' ') {
+      returnResult += lowerCaseString[i].toUpperCase();
+      i++;
+      returnResult += lowerCaseString[i].toUpperCase();
+    } else {
+      returnResult += lowerCaseString[i];
+    }
+  }
+  return returnResult;
+}
+
+function handleSearchBar(event) {
+  event.preventDefault();
+  var genre = checkListOfGenre(event.srcElement[0].value);
+  if (genre.isIn) {
+    info.page = 'search';
+    checkPage(genre.genre);
+    searchAnime(genre.index, 'genre');
+  }
+  $searchBar.reset();
+}
+$searchBar.addEventListener('submit', handleSearchBar);
