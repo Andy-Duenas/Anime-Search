@@ -4,6 +4,7 @@ var $topMainList = document.querySelector('.top-list');
 var $randomMainList = document.querySelector('.random-list');
 var $homeButton = document.querySelector('.home-button');
 var $randomButton = document.querySelector('.random-button');
+var $rankButton = document.querySelector('.top-button');
 var $topAnimeHeader = document.querySelector('.top-header');
 var $randomAnimeHeader = document.querySelector('.random-header');
 
@@ -47,7 +48,13 @@ function checkPage() {
     removeAllChildren($randomMainList);
     $topAnimeHeader.className = 'hidden';
     $randomAnimeHeader.className = 'random-header';
-    getTopRated(0, 10);
+    getTopRated(0, 12);
+  } else if (info.page === 'rank') {
+    removeAllChildren($topMainList);
+    removeAllChildren($randomMainList);
+    $topAnimeHeader.className = 'top-header';
+    $randomAnimeHeader.className = 'hidden';
+    getTopRated(12, 0);
   }
 }
 
@@ -184,3 +191,10 @@ function handleRandomButton(event) {
 }
 
 $randomButton.addEventListener('click', handleRandomButton);
+
+function handleRankButton(event) {
+  info.page = 'rank';
+  checkPage();
+}
+
+$rankButton.addEventListener('click', handleRankButton);
