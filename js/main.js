@@ -7,6 +7,7 @@ var $randomButton = document.querySelector('.random-button');
 var $rankButton = document.querySelector('.top-button');
 var $topAnimeHeader = document.querySelector('.top-header');
 var $randomAnimeHeader = document.querySelector('.random-header');
+var $searchBar = document.querySelector('form');
 
 function getTopRated(numOfTop, numOfRand) {
   var xhr = new XMLHttpRequest();
@@ -198,3 +199,9 @@ function handleRankButton(event) {
 }
 
 $rankButton.addEventListener('click', handleRankButton);
+
+function handleSearchBar(event) {
+  event.preventDefault();
+
+}
+$searchBar.addEventListener('submit', handleSearchBar);
