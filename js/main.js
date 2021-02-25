@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
 var genreList = ['action', 'adventure', 'cars',
@@ -19,7 +18,6 @@ function getTopRated(numOfTop, numOfRand) {
   xhr.open('GET', 'https://api.jikan.moe/v3/top/anime');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // console.log(xhr.response);
     if (numOfTop !== 0) {
       setTopRated(xhr.response.top, numOfTop);
     }
@@ -36,7 +34,6 @@ function getAnime(id, index, type, objForTree) {
   xhr.open('GET', 'https://api.jikan.moe/v3/anime/' + id);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // console.log(xhr.response);
     setGenreRank(xhr.response, index, objForTree, type);
   });
   xhr.send();
@@ -52,28 +49,30 @@ function searchAnime(searchFor, type) {
   }
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // console.log(xhr.response);
     setTopRated(xhr.response.results, 12);
   });
   xhr.send();
 }
 
-function checkPage() {
+function checkPage(text) {
   if (info.page === 'home') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
+    $topAnimeHeader.textContent = 'Top Anime';
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'random-header';
     getTopRated(3, 4);
   } else if (info.page === 'random') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
+    $topAnimeHeader.textContent = 'Top Anime';
     $topAnimeHeader.className = 'hidden';
     $randomAnimeHeader.className = 'random-header';
     getTopRated(0, 12);
   } else if (info.page === 'rank') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
+    $topAnimeHeader.textContent = 'Top Anime';
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'hidden';
     getTopRated(12, 0);
@@ -81,6 +80,9 @@ function checkPage() {
   if (info.page === 'search') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
+    $topAnimeHeader.textContent = 'Search:' + text;
+    $topAnimeHeader.className = 'top-header';
+    $randomAnimeHeader.className = 'hidden';
   }
 }
 
@@ -226,10 +228,14 @@ function handleRankButton(event) {
 $rankButton.addEventListener('click', handleRankButton);
 
 function checkListOfGenre(value) {
+  var animeType = {};
   value = value.toLowerCase();
   for (var i = 0; i < genreList.length; i++) {
     if (value === genreList[i]) {
-      return i + 1;
+      animeType.index = i + 1;
+      animeType.genre = genreList[i];
+      animeType.isIn = true;
+      return animeType;
     }
   }
   return false;
@@ -237,11 +243,11 @@ function checkListOfGenre(value) {
 
 function handleSearchBar(event) {
   event.preventDefault();
-  var isGenre = checkListOfGenre(event.srcElement[0].value);
-  if (isGenre) {
+  var genre = checkListOfGenre(event.srcElement[0].value);
+  if (genre.isIn) {
     info.page = 'search';
-    checkPage();
-    searchAnime(isGenre, 'genre');
+    checkPage(genre.genre);
+    searchAnime(genre.index, 'genre');
   }
   $searchBar.reset();
 }
