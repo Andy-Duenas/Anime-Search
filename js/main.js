@@ -19,6 +19,7 @@ function getTopRated(numOfTop, numOfRand) {
   xhr.open('GET', 'https://api.jikan.moe/v3/top/anime');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    // console.log(xhr.response);
     if (numOfTop !== 0) {
       setTopRated(xhr.response.top, numOfTop);
     }
@@ -35,6 +36,7 @@ function getAnime(id, index, type, objForTree) {
   xhr.open('GET', 'https://api.jikan.moe/v3/anime/' + id);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    // console.log(xhr.response);
     setGenreRank(xhr.response, index, objForTree, type);
   });
   xhr.send();
@@ -43,14 +45,15 @@ function getAnime(id, index, type, objForTree) {
 function searchAnime(searchFor, type) {
   var xhr = new XMLHttpRequest();
   if (type === 'genre') {
-    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=start_date&sort=desc');
+    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=score&sort=desc');
   }
   if (type === 'anime') {
     xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=');
   }
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    setTopRated(xhr.response.results, 10);
+    // console.log(xhr.response);
+    setTopRated(xhr.response.results, 12);
   });
   xhr.send();
 }
@@ -74,6 +77,10 @@ function checkPage() {
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'hidden';
     getTopRated(12, 0);
+  }
+  if (info.page === 'search') {
+    removeAllChildren($topMainList);
+    removeAllChildren($randomMainList);
   }
 }
 
@@ -154,9 +161,6 @@ function treeMaker(obj, type) {
 function setTopRated(animeList, amount) {
   for (var i = 0; i < amount; i++) {
     var obj = {};
-    console.log('animeList[i].image_url', animeList[i].image_url);
-    console.log('animeList[i].title', animeList[i].title);
-    console.log('animeList[i].mal_id', animeList[i].mal_id);
     obj.url = animeList[i].image_url;
     obj.title = animeList[i].title;
     getAnime(animeList[i].mal_id, i, 'topAnime', obj);
@@ -235,9 +239,9 @@ function handleSearchBar(event) {
   event.preventDefault();
   var isGenre = checkListOfGenre(event.srcElement[0].value);
   if (isGenre) {
+    info.page = 'search';
+    checkPage();
     searchAnime(isGenre, 'genre');
-  } else {
-    console.log('no');
   }
   $searchBar.reset();
 }
