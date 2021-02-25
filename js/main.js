@@ -1,7 +1,11 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
 var genreList = ['action', 'adventure', 'cars',
-  'comedy', 'dementia', 'demons', 'mystery', 'drama', 'ecchi'];
+  'comedy', 'dementia', 'demons', 'mystery', 'drama', 'ecchi', 'fantasy', 'game', 'hentai',
+  'historical', 'horror', 'kids', 'magic', 'martial arts', 'mecha', 'music', 'parody', 'samurai',
+  'romance', 'school', 'sci fi', 'shoujo', 'shoujo ai:', 'shounen', 'shounen ai:', 'space', 'sports', 'super powers',
+  'vampire', 'yaoi', 'yuri', 'harem', 'slice of life', 'supernatural', 'military', 'police', 'psychological', 'thriller', 'harem', 'seinen', 'josei'];
+
 var $topMainList = document.querySelector('.top-list');
 var $randomMainList = document.querySelector('.random-list');
 var $homeButton = document.querySelector('.home-button');
@@ -44,9 +48,6 @@ function searchAnime(searchFor, type) {
   if (type === 'genre') {
     xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=score&sort=desc');
   }
-  if (type === 'anime') {
-    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=');
-  }
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     setTopRated(xhr.response.results, 12);
@@ -80,9 +81,10 @@ function checkPage(text) {
   if (info.page === 'search') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
-    $topAnimeHeader.textContent = 'Search:' + text;
+    $topAnimeHeader.textContent = 'Search: ' + text;
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'hidden';
+    info.page = 'home';
   }
 }
 
@@ -233,12 +235,28 @@ function checkListOfGenre(value) {
   for (var i = 0; i < genreList.length; i++) {
     if (value === genreList[i]) {
       animeType.index = i + 1;
-      animeType.genre = genreList[i];
+      animeType.genre = capitalizeWords(genreList[i]);
       animeType.isIn = true;
       return animeType;
     }
   }
   return false;
+}
+
+function capitalizeWords(string) {
+  var lowerCaseString = string.toLowerCase();
+  var returnResult = '';
+  returnResult += string[0].toUpperCase();
+  for (var i = 1; i < string.length; i++) {
+    if (string[i] === ' ') {
+      returnResult += lowerCaseString[i].toUpperCase();
+      i++;
+      returnResult += lowerCaseString[i].toUpperCase();
+    } else {
+      returnResult += lowerCaseString[i];
+    }
+  }
+  return returnResult;
 }
 
 function handleSearchBar(event) {
