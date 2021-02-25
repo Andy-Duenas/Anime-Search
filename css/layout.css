@@ -130,6 +130,7 @@ img {
   .column-one-third,
   .column-half {
     display: flex;
+    padding: 12px;
   }
 
   .img-container {
