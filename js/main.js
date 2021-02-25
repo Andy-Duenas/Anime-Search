@@ -1,5 +1,8 @@
+/* eslint-disable no-console */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
+var genreList = ['action', 'adventure', 'cars',
+  'comedy', 'dementia', 'demons', 'mystery', 'drama', 'ecchi'];
 var $topMainList = document.querySelector('.top-list');
 var $randomMainList = document.querySelector('.random-list');
 var $homeButton = document.querySelector('.home-button');
@@ -8,6 +11,8 @@ var $rankButton = document.querySelector('.top-button');
 var $topAnimeHeader = document.querySelector('.top-header');
 var $randomAnimeHeader = document.querySelector('.random-header');
 var $searchBar = document.querySelector('form');
+
+checkPage();
 
 function getTopRated(numOfTop, numOfRand) {
   var xhr = new XMLHttpRequest();
@@ -25,14 +30,27 @@ function getTopRated(numOfTop, numOfRand) {
   xhr.send();
 }
 
-checkPage();
-
 function getAnime(id, index, type, objForTree) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.jikan.moe/v3/anime/' + id);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     setGenreRank(xhr.response, index, objForTree, type);
+  });
+  xhr.send();
+}
+
+function searchAnime(searchFor, type) {
+  var xhr = new XMLHttpRequest();
+  if (type === 'genre') {
+    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=start_date&sort=desc');
+  }
+  if (type === 'anime') {
+    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=');
+  }
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    setTopRated(xhr.response.results, 10);
   });
   xhr.send();
 }
@@ -136,6 +154,9 @@ function treeMaker(obj, type) {
 function setTopRated(animeList, amount) {
   for (var i = 0; i < amount; i++) {
     var obj = {};
+    console.log('animeList[i].image_url', animeList[i].image_url);
+    console.log('animeList[i].title', animeList[i].title);
+    console.log('animeList[i].mal_id', animeList[i].mal_id);
     obj.url = animeList[i].image_url;
     obj.title = animeList[i].title;
     getAnime(animeList[i].mal_id, i, 'topAnime', obj);
@@ -200,8 +221,24 @@ function handleRankButton(event) {
 
 $rankButton.addEventListener('click', handleRankButton);
 
+function checkListOfGenre(value) {
+  value = value.toLowerCase();
+  for (var i = 0; i < genreList.length; i++) {
+    if (value === genreList[i]) {
+      return i + 1;
+    }
+  }
+  return false;
+}
+
 function handleSearchBar(event) {
   event.preventDefault();
-
+  var isGenre = checkListOfGenre(event.srcElement[0].value);
+  if (isGenre) {
+    searchAnime(isGenre, 'genre');
+  } else {
+    console.log('no');
+  }
+  $searchBar.reset();
 }
 $searchBar.addEventListener('submit', handleSearchBar);

@@ -17,7 +17,8 @@
   flex-wrap: wrap;
 }
 
-.column-full {
+.column-full,
+form {
   width: 100%;
 }
 
