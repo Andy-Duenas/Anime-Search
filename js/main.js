@@ -319,7 +319,10 @@ $searchBar.addEventListener('submit', handleSearchBar);
 
 function handleFavorites(event) {
   if (event.target.className === 'favorite-icon fas fa-star') {
+    event.target.className = 'favorite-icon-on fas fa-star';
     console.log('yay');
+  } else if (event.target.className === 'favorite-icon-on fas fa-star') {
+    event.target.className = 'favorite-icon fas fa-star';
   }
 }
 
