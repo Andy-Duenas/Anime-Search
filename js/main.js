@@ -80,11 +80,10 @@ function searchAnime(searchFor, type) {
     xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=score&sort=desc&genre_exclude=0');
   }
   if (type === 'anime') {
-    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=' + searchFor + '&sort=desc');
+    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=' + searchFor + '&sort=desc&genre_exclude=0');
   }
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log(xhr.response);
     setTopRated(xhr.response.results, 12);
   });
   xhr.send();
@@ -265,19 +264,6 @@ function handleRankButton(event) {
 
 $rankButton.addEventListener('click', handleRankButton);
 
-function checkListOfGenre(value) {
-  var animeType = {};
-  value = value.toLowerCase();
-  animeType.value = value;
-  animeType.genre = genreList[deleteSpaces(value)];
-  if (animeType.genre === undefined) {
-    animeType.isIn = false;
-  } else {
-    animeType.isIn = true;
-  }
-  return animeType;
-}
-
 function deleteSpaces(string) {
   var lowerCaseString = string.toLowerCase();
   var returnResult = '';
@@ -299,6 +285,18 @@ function capitalizeWords(string) {
     }
   }
   return returnResult;
+}
+function checkListOfGenre(value) {
+  var animeType = {};
+  value = value.toLowerCase();
+  animeType.value = value;
+  animeType.genre = genreList[deleteSpaces(value)];
+  if (animeType.genre === undefined) {
+    animeType.isIn = false;
+  } else {
+    animeType.isIn = true;
+  }
+  return animeType;
 }
 
 function handleSearchBar(event) {
