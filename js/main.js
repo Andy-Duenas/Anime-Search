@@ -291,7 +291,7 @@ function checkListOfGenre(value) {
   value = value.toLowerCase();
   animeType.value = value;
   animeType.genre = genreList[deleteSpaces(value)];
-  if (animeType.genre === undefined) {
+  if (!animeType.genre) {
     animeType.isIn = false;
   } else {
     animeType.isIn = true;
