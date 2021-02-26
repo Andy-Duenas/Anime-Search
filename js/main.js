@@ -96,21 +96,21 @@ function checkPage(text) {
     $topAnimeHeader.textContent = 'Top Anime';
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'random-header';
-    getTopRated(3, 4);
+    getTopRated(6, 8);
   } else if (info.page === 'random') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
     $topAnimeHeader.textContent = 'Top Anime';
     $topAnimeHeader.className = 'hidden';
     $randomAnimeHeader.className = 'random-header';
-    getTopRated(0, 12);
+    getTopRated(0, 20);
   } else if (info.page === 'rank') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
     $topAnimeHeader.textContent = 'Top Anime';
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'hidden';
-    getTopRated(12, 0);
+    getTopRated(20, 0);
   } else if (info.page === 'mylist') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
