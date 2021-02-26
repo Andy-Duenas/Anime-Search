@@ -15,8 +15,20 @@ header,
   border: solid black 1px;
 }
 
+.favorite-icon {
+  cursor: pointer;
+}
+
+.favorite-icon-on {
+  cursor: pointer;
+  color: yellow;
+}
+
+.input-bar {
+  outline: none;
+}
+
 .menu-button,
-.input-bar,
 .search-button {
   cursor: pointer;
   outline: none;

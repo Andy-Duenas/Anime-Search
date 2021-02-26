@@ -1,5 +1,6 @@
 /* exported data */
 var info = {
+  entries: [],
   page: 'home'
 };
 
