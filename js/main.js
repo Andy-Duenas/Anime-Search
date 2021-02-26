@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
+/* global info */
+/* exported info */
 var genreList = {
   action: 1,
   adventure: 2,
@@ -318,11 +320,15 @@ function handleSearchBar(event) {
 $searchBar.addEventListener('submit', handleSearchBar);
 
 function handleFavorites(event) {
+
+  console.log(info);
   if (event.target.className === 'favorite-icon fas fa-star') {
+    info.entries.unshift(event.target.closest('.column-one-third').querySelector('.anime-title-top').textContent);
     event.target.className = 'favorite-icon-on fas fa-star';
-    console.log('yay');
+
   } else if (event.target.className === 'favorite-icon-on fas fa-star') {
     event.target.className = 'favorite-icon fas fa-star';
+    console.log(info.myList);
   }
 }
 
