@@ -1,6 +1,7 @@
 /* exported data */
 var info = {
-  page: 'home'
+  page: 'home',
+  myList: []
 };
 
 var prevData = localStorage.getItem('jv-local-storage');

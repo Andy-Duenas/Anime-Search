@@ -15,6 +15,10 @@ header,
   border: solid black 1px;
 }
 
+.favorite-icon {
+  cursor: pointer;
+}
+
 .menu-button,
 .input-bar,
 .search-button {

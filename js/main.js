@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
 var genreList = {
@@ -315,3 +316,12 @@ function handleSearchBar(event) {
   $searchBar.reset();
 }
 $searchBar.addEventListener('submit', handleSearchBar);
+
+function handleFavorites(event) {
+  if (event.target.className === 'favorite-icon fas fa-star') {
+    console.log('yay');
+  }
+}
+
+$topMainList.addEventListener('click', handleFavorites);
+$randomMainList.addEventListener('click', handleFavorites);
