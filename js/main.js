@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
 var genreList = {
@@ -78,10 +77,14 @@ function getAnime(id, index, type, objForTree) {
 function searchAnime(searchFor, type) {
   var xhr = new XMLHttpRequest();
   if (type === 'genre') {
-    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=score&sort=desc');
+    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=score&sort=desc&genre_exclude=0');
+  }
+  if (type === 'anime') {
+    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=' + searchFor + '&sort=desc');
   }
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    console.log(xhr.response);
     setTopRated(xhr.response.results, 12);
   });
   xhr.send();
@@ -110,7 +113,7 @@ function checkPage(text) {
     $randomAnimeHeader.className = 'hidden';
     getTopRated(12, 0);
   }
-  if (info.page === 'search') {
+  if (info.page === 'search-genre' || info.page === 'search-anime') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
     $topAnimeHeader.textContent = 'Search: ' + text;
@@ -118,6 +121,7 @@ function checkPage(text) {
     $randomAnimeHeader.className = 'hidden';
     info.page = 'home';
   }
+
 }
 
 function removeAllChildren(parent) {
@@ -264,11 +268,14 @@ $rankButton.addEventListener('click', handleRankButton);
 function checkListOfGenre(value) {
   var animeType = {};
   value = value.toLowerCase();
-  console.log(genreList[deleteSpaces(value)]);
+  animeType.value = value;
   animeType.genre = genreList[deleteSpaces(value)];
-  animeType.isIn = true;
+  if (animeType.genre === undefined) {
+    animeType.isIn = false;
+  } else {
+    animeType.isIn = true;
+  }
   return animeType;
-
 }
 
 function deleteSpaces(string) {
@@ -278,13 +285,34 @@ function deleteSpaces(string) {
   return returnResult;
 }
 
+function capitalizeWords(string) {
+  var lowerCaseString = string.toLowerCase();
+  var returnResult = '';
+  returnResult += string[0].toUpperCase();
+  for (var i = 1; i < string.length; i++) {
+    if (string[i] === ' ') {
+      returnResult += lowerCaseString[i].toUpperCase();
+      i++;
+      returnResult += lowerCaseString[i].toUpperCase();
+    } else {
+      returnResult += lowerCaseString[i];
+    }
+  }
+  return returnResult;
+}
+
 function handleSearchBar(event) {
   event.preventDefault();
   var genre = checkListOfGenre(event.srcElement[0].value);
   if (genre.isIn) {
-    info.page = 'search';
+    info.page = 'search-genre';
     checkPage(event.srcElement[0].value);
     searchAnime(genre.genre, 'genre');
+  } else {
+    info.page = 'search-anime';
+    genre.value = capitalizeWords(genre.value);
+    checkPage(genre.value);
+    searchAnime(genre.value, 'anime');
   }
   $searchBar.reset();
 }
