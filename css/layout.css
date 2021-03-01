@@ -59,7 +59,7 @@ form {
 
 .column-one-third {
   padding: 8px;
-  flex-basis: calc(100% / 3);
+  flex-basis: calc(100% / 2);
   height: 100%;
 }
 
@@ -78,11 +78,15 @@ form {
 .img-container,
 .big-img {
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   object-fit: contain;
+  width: 120px;
   height: 150px;
 }
 
 .big-img {
+  width: 130px;
   height: 200px;
 }
 
@@ -99,18 +103,13 @@ img {
 }
 
 @media screen and (min-width: 768px) {
-  .container {
-    width: 75vw;
-    margin: auto;
-  }
-
   .input-bar {
     width: 30%;
   }
 
   .search-button {
     justify-content: center;
-    width: 6%;
+    width: 8%;
   }
 
   .top-rank,
@@ -138,5 +137,37 @@ img {
   .img-container {
     width: 200px;
     height: 280px;
+  }
+
+  .img-container,
+  .big-img {
+    left: 0;
+    transform: translateX(0%);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .input-bar {
+    width: 30%;
+  }
+
+  .search-button {
+    justify-content: center;
+    width: 6%;
+  }
+
+  .column-one-third {
+    flex-basis: calc(150% / 3);
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .container {
+    width: 75vw;
+    margin: auto;
+  }
+
+  .column-one-third {
+    flex-basis: calc(100% / 3);
   }
 }
