@@ -77,14 +77,14 @@ function getAnime(id, index, type, objForTree) {
 function searchAnime(searchFor, type) {
   var xhr = new XMLHttpRequest();
   if (type === 'genre') {
-    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=score&sort=desc&genre_exclude=0');
+    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=score&sort=desc');
   }
   if (type === 'anime') {
-    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=' + searchFor + '&sort=desc&genre_exclude=0');
+    xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=' + searchFor + '&sort=desc');
   }
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    if (type === 'anime') { setTopRated(xhr.response.results, 12); }
+    setTopRated(xhr.response.results, 12);
   });
   xhr.send();
 }
