@@ -8,7 +8,7 @@ A dynamic HTML, CSS, and JavaScript solo project.
 *JavaScript
 
 ## Features
-*User can view a list of the top anime.
+⋅⋅*User can view a list of the top anime.
 *User can view a List of random anime.
 *User can search for a specific genre.
 *User can search for a specific anime
