@@ -70,9 +70,16 @@ form {
   padding: 15px;
 }
 
+.card-container {
+  padding: 0.5rem;
+  width: 100%;
+}
+
 .anime-title,
 .anime-title-top {
-  margin: 0;
+  margin: 10px 0 0 0;
+  height: 20px;
+  overflow: hidden;
 }
 
 .img-container,
@@ -127,9 +134,14 @@ img {
   .random-rank,
   .random-genre,
   .anime-title,
-  .anime-title-top {
+  .anime-title-top,
+  .card-container {
     display: flex;
     text-align: left;
+  }
+
+  .card-container {
+    padding: 1rem;
   }
 
   .column-info {

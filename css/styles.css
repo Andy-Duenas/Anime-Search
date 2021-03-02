@@ -2,8 +2,7 @@ body {
   font-family: 'Philosopher', sans-serif;
 }
 
-header,
-.background-color {
+header {
   font-family: 'Philosopher', sans-serif;
   font-style: italic;
   background-color: #68a9ff;
@@ -41,12 +40,16 @@ header,
   font-weight: bold;
 }
 
+.card-container {
+  background-color: whitesmoke;
+}
+
 .menu-button:hover {
   color: yellow;
 }
 
-.background-color {
-  background-color: #8cb3e6;
+.column-one-third {
+  background-color: white;
 }
 
 @media screen and (min-width: 1024px) {

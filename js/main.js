@@ -180,9 +180,12 @@ function inList(title) {
 
 function treeMaker(obj, type) {
   var firstcol = document.createElement('div');
+  var cardContainer = document.createElement('div');
+  cardContainer.setAttribute('class', 'card-container');
+  firstcol.appendChild(cardContainer);
   var imgContainer = document.createElement('div');
 
-  firstcol.appendChild(imgContainer);
+  cardContainer.appendChild(imgContainer);
   var star = document.createElement('i');
   if (inList(obj.title)) {
     star.setAttribute('class', 'favorite-icon-on fas fa-star');
@@ -198,7 +201,7 @@ function treeMaker(obj, type) {
 
   var colInfo = document.createElement('div');
   colInfo.setAttribute('class', 'column-info');
-  firstcol.appendChild(colInfo);
+  cardContainer.appendChild(colInfo);
 
   var title = document.createElement('h4');
   title.textContent = obj.title;
