@@ -47,14 +47,18 @@ var $searchBar = document.querySelector('form');
 var $myListButton = document.querySelector('.mylist-button');
 var $loading = document.querySelector('.column-load');
 
+var loadAnim = gsap.to('.loading', { rotate: 360, repeat: 3, duration: 0.7 });
+
 checkPage();
 
 function getTopRated(numOfTop, numOfRand) {
   $loading.className = 'column-load';
+  loadAnim.restart();
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.jikan.moe/v3/top/anime');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    loadAnim.pause();
     $loading.className = 'column-load hidden';
     if (numOfTop !== 0) {
       setTopRated(xhr.response.top, numOfTop);
@@ -69,10 +73,12 @@ function getTopRated(numOfTop, numOfRand) {
 
 function getAnime(id, index, type, objForTree) {
   $loading.className = 'column-load';
+  loadAnim.restart();
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.jikan.moe/v3/anime/' + id);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    loadAnim.pause();
     $loading.className = 'column-load hidden';
     setGenreRank(xhr.response, index, objForTree, type);
   });
@@ -81,6 +87,7 @@ function getAnime(id, index, type, objForTree) {
 
 function searchAnime(searchFor, type) {
   $loading.className = 'column-load';
+  loadAnim.restart();
   var xhr = new XMLHttpRequest();
   if (type === 'genre') {
     xhr.open('GET', 'https://api.jikan.moe/v3/search/anime?q=&page=1&genre=' + searchFor + '&order_by=score&sort=desc');
@@ -90,6 +97,7 @@ function searchAnime(searchFor, type) {
   }
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    loadAnim.pause();
     $loading.className = 'column-load hidden';
     setTopRated(xhr.response.results, 12);
   });
