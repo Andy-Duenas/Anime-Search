@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-undef */
 var genreList = {
   action: 1,
@@ -400,3 +401,15 @@ function handleFavorites(event) {
 
 $topMainList.addEventListener('click', handleFavorites);
 $randomMainList.addEventListener('click', handleFavorites);
+
+function handleAnime(event) {
+  if (event.target.closest('.column-one-third')) {
+    console.log(event.target.closest('.column-one-third').querySelector('.anime-title-top').textContent);
+  }
+  if (event.target.closest('.column-half')) {
+    console.log(event.target.closest('.column-half').querySelector('.anime-title').textContent);
+  }
+}
+
+$topMainList.addEventListener('click', handleAnime);
+$randomMainList.addEventListener('click', handleAnime);

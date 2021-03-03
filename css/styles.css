@@ -18,6 +18,10 @@ header {
   cursor: pointer;
 }
 
+.favorite-icon:hover {
+  color: yellow;
+}
+
 .favorite-icon-on {
   cursor: pointer;
   color: yellow;
