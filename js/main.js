@@ -178,6 +178,39 @@ function setGenreRank(anime, index, objForTree, type) {
       genreList += ' ' + anime.genres[i].name;
     }
   }
+  var studiosList = 'Studios: ';
+  for (var a = 0; a < anime.studios.length; a++) {
+    if (a + 1 < anime.studios.length) {
+      studiosList += ' ' + anime.studios[a].name + ',';
+    } else {
+      studiosList += ' ' + anime.studios[a].name;
+    }
+  }
+  var opThemesList = 'Openings: ';
+  for (var q = 0; q < anime.opening_themes.length; q++) {
+    if (q + 1 < anime.opening_themes.length) {
+      opThemesList += ' ' + anime.opening_themes[q] + ',';
+    } else {
+      opThemesList += ' ' + anime.opening_themes[q];
+    }
+  } var endThemesList = 'Endings: ';
+  for (var p = 0; p < anime.ending_themes.length; p++) {
+    if (p + 1 < anime.ending_themes.length) {
+      endThemesList += ' ' + anime.ending_themes[p] + ',';
+    } else {
+      endThemesList += ' ' + anime.ending_themes[p];
+    }
+  }
+  objForTree.studios = studiosList;
+  objForTree.op = opThemesList;
+  objForTree.end = endThemesList;
+  objForTree.synopsis = 'Synopsis: ' + anime.synopsis;
+  objForTree.score = 'Score: ' + anime.score;
+  objForTree.rating = 'Rating: ' + anime.rating;
+  objForTree.premiered = 'Premiered: ' + anime.premiered;
+  objForTree.duration = 'Length: ' + anime.duration;
+  objForTree.episodes = 'Episodes: ' + anime.episodes;
+
   objForTree.rank = 'Rank: ' + anime.rank;
   objForTree.genre = genreList;
   var topOfTree = treeMaker(objForTree, type);
@@ -253,14 +286,75 @@ function treeMaker(obj, type) {
   }
 
   if (type === 'singleAnime') {
+    var secondInfo = document.createElement('div');
+    secondInfo.setAttribute('class', 'large-col-info');
+    firstcol.appendChild(secondInfo);
+
+    var leftSide = document.createElement('div');
+    leftSide.setAttribute('class', 'large-half');
+    secondInfo.appendChild(leftSide);
+
+    var rightSide = document.createElement('div');
+    rightSide.setAttribute('class', 'large-half');
+    secondInfo.appendChild(rightSide);
+
+    var studio = document.createElement('h4');
+    studio.textContent = obj.studios;
+    studio.setAttribute('class', 'large-h4');
+    leftSide.appendChild(studio);
+
+    var scoring = document.createElement('h4');
+    scoring.textContent = obj.score;
+    scoring.setAttribute('class', 'large-h4');
+    leftSide.appendChild(scoring);
+
+    var rates = document.createElement('h4');
+    rates.textContent = obj.rating;
+    rates.setAttribute('class', 'large-h4');
+    leftSide.appendChild(rates);
+
+    var numEp = document.createElement('h4');
+    numEp.textContent = obj.episodes;
+    numEp.setAttribute('class', 'large-h4');
+    rightSide.appendChild(numEp);
+
+    var premiereDate = document.createElement('h4');
+    premiereDate.textContent = obj.premiered;
+    premiereDate.setAttribute('class', 'large-h4');
+    rightSide.appendChild(premiereDate);
+
+    var lengthEp = document.createElement('h4');
+    lengthEp.textContent = obj.duration;
+    lengthEp.setAttribute('class', 'large-h4');
+    rightSide.appendChild(lengthEp);
+
+    var thirdInfo = document.createElement('div');
+    thirdInfo.setAttribute('class', 'large-full-column');
+    firstcol.appendChild(thirdInfo);
+
+    var op = document.createElement('h4');
+    op.textContent = obj.op;
+    op.setAttribute('class', 'large-h4');
+    thirdInfo.appendChild(op);
+
+    var end = document.createElement('h4');
+    end.textContent = obj.end;
+    end.setAttribute('class', 'large-h4');
+    thirdInfo.appendChild(end);
+
+    var syn = document.createElement('h4');
+    syn.textContent = obj.synopsis;
+    syn.setAttribute('class', 'large-h4');
+    thirdInfo.appendChild(syn);
+
     firstcol.setAttribute('class', 'large-col');
     cardContainer.setAttribute('class', 'large-card-container');
     imgContainer.setAttribute('class', 'large-img-container');
     colInfo.setAttribute('class', 'large-column-info');
     img.setAttribute('class', 'large-img');
-    title.setAttribute('class', 'large-title');
-    rank.setAttribute('class', 'large-rank');
-    genre.setAttribute('class', 'large-genre');
+    title.setAttribute('class', 'large-h4');
+    rank.setAttribute('class', 'large-h4');
+    genre.setAttribute('class', 'large-h4');
   }
 
   return firstcol;

@@ -76,26 +76,21 @@ form {
 }
 
 .large-col {
-  padding: 0.5rem;
   width: 100%;
   height: 100%;
-  border: black solid;
 }
 
 .large-card-container {
   display: flex;
+  padding: 0.5rem;
 }
 
 .large-column-info {
   width: 50%;
-  margin: 0;
-  padding: 0;
 }
 
-.large-rank,
-.large-title,
-.large-genre {
-  margin: 0.4rem;
+.large-h4 {
+  margin: 0 0.4rem 0.8rem 0.4rem;
   border-bottom: solid 1px gainsboro;
 }
 
@@ -104,6 +99,20 @@ form {
   object-fit: contain;
   width: 150px;
   height: 200px;
+}
+
+.large-col-info {
+  width: 100%;
+  display: flex;
+  align-content: space-between;
+}
+
+.large-full-column {
+  width: 100%;
+}
+
+.large-half {
+  width: 50%;
 }
 
 .anime-title,

@@ -45,7 +45,9 @@ header {
 }
 
 .card-container,
-.large-card-container {
+.large-card-container,
+.large-full-column,
+.large-col-info {
   background-color: whitesmoke;
 }
 
