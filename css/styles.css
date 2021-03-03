@@ -44,7 +44,8 @@ header {
   font-weight: bold;
 }
 
-.card-container {
+.card-container,
+.large-card-container {
   background-color: whitesmoke;
 }
 
