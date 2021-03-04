@@ -20,6 +20,8 @@
 .column-full,
 form {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .column-half-h {
@@ -89,8 +91,17 @@ form {
   width: 50%;
 }
 
-.large-h4 {
-  margin: 0 0.4rem 0.8rem 0.4rem;
+.large-half {
+  width: 50%;
+}
+
+.large-h4,
+.large-title,
+.large-rank,
+.large-genre {
+  width: 100%;
+  margin: 0;
+  padding: 0.5rem;
   border-bottom: solid 1px gainsboro;
 }
 
@@ -104,15 +115,10 @@ form {
 .large-col-info {
   width: 100%;
   display: flex;
-  align-content: space-between;
 }
 
 .large-full-column {
   width: 100%;
-}
-
-.large-half {
-  width: 50%;
 }
 
 .anime-title,
@@ -137,12 +143,10 @@ form {
   height: 200px;
 }
 
-.favorite-icon,
+/* .favorite-icon,
 .favorite-icon-on {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-}
+
+} */
 
 .column-load {
   width: 100%;
@@ -205,6 +209,19 @@ img {
   .big-img {
     left: 0;
     transform: translateX(0%);
+  }
+
+  .large-h4,
+  .large-title,
+  .large-rank,
+  .large-genre {
+    padding: 1rem;
+    border-bottom: solid 1px gainsboro;
+  }
+
+  .large-img-container {
+    width: 220px;
+    height: 300px;
   }
 }
 
