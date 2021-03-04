@@ -12,7 +12,6 @@
 }
 
 .wrap-row {
-  /* display: flex; */
   flex-wrap: wrap;
 }
 
@@ -87,6 +86,14 @@ form {
   padding-top: 10px;
 }
 
+.column-info > .favorite-icon {
+  margin-right: 3px;
+}
+
+.column-info > .favorite-icon-on {
+  margin-right: 3px;
+}
+
 .anime-title-top {
   margin: 0;
   height: 20px;
@@ -153,7 +160,6 @@ form {
 .large-title,
 .large-rank,
 .large-genre {
-  width: 100%;
   margin: 0;
   padding: 0.5rem;
   border-bottom: solid 1px gainsboro;
@@ -169,22 +175,56 @@ img {
 }
 
 @media screen and (min-width: 568px) {
+  .input-bar {
+    width: 150px;
+    height: 22px;
+  }
+
+  .search-button {
+    height: 22px;
+  }
+
   .column-one-third {
-    display: flex;
-    justify-content: center;
     flex-basis: calc(100% / 3);
     margin: auto;
+  }
+
+  .large-top-info {
+    width: 100%;
+    height: 100%;
+  }
+
+  .large-column-info {
+    flex-basis: auto;
+  }
+
+  .large-img-container {
+    width: 190px;
+    height: 240px;
   }
 }
 
 @media screen and (min-width: 768px) {
   .input-bar {
-    width: 30%;
+    width: 180px;
+    height: 22px;
   }
 
   .search-button {
-    justify-content: center;
-    width: 8%;
+    width: 30px;
+    height: 22px;
+  }
+
+  .anime-title-top,
+  .favorite-icon,
+  .favorite-icon-on {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .favorite-icon,
+  .favorite-icon-on {
+    text-align: right;
   }
 
   .top-rank,
@@ -195,27 +235,26 @@ img {
   }
 
   .card-container {
-    padding: 1rem;
+    width: 100%;
+    padding: 0;
   }
 
   .column-info {
+    display: block;
+    margin: 0;
     text-align: left;
-    width: 50%;
-    padding: 0 1rem;
+    flex-basis: calc(100% / 2);
+    padding: 0 0.5rem 0 0.5rem;
   }
 
   .column-one-third {
-    display: flex;
+    flex-basis: calc(100% / 2);
     padding: 12px;
   }
 
   .img-container {
     width: 200px;
     height: 280px;
-  }
-
-  .img-container,
-  .big-img {
     left: 0;
     transform: translateX(0%);
   }
@@ -236,12 +275,13 @@ img {
 
 @media screen and (min-width: 1024px) {
   .input-bar {
-    width: 30%;
+    width: 220px;
+    height: 30px;
   }
 
   .search-button {
-    justify-content: center;
-    width: 6%;
+    width: 40px;
+    height: 30px;
   }
 
   .column-one-third {
