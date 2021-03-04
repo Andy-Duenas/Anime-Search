@@ -21,6 +21,7 @@ header {
 .favorite-icon-on {
   cursor: pointer;
   color: yellow;
+  text-shadow: 0 0 2px black;
 }
 
 .input-bar {
@@ -41,9 +42,9 @@ header {
 }
 
 .card-container,
-.large-card-container,
+.large-top-info,
 .large-full-column,
-.large-col-info {
+.large-mid-info {
   background-color: whitesmoke;
 }
 
@@ -67,5 +68,6 @@ header {
 
   .favorite-icon:hover {
     color: yellow;
+    text-shadow: 0 0 2px black;
   }
 }

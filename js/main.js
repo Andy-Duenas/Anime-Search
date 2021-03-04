@@ -121,7 +121,7 @@ function checkPage(text) {
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'random-header';
     $singleAnime.checkPage = 'hidden';
-    getTopRated(6, 8);
+    getTopRated(6, 6);
   } else if (info.page === 'random') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
@@ -130,7 +130,7 @@ function checkPage(text) {
     $topAnimeHeader.className = 'hidden';
     $randomAnimeHeader.className = 'random-header';
     $singleAnime.checkPage = 'hidden';
-    getTopRated(0, 20);
+    getTopRated(0, 18);
   } else if (info.page === 'rank') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
@@ -139,7 +139,7 @@ function checkPage(text) {
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'hidden';
     $singleAnime.checkPage = 'hidden';
-    getTopRated(20, 0);
+    getTopRated(18, 0);
   } else if (info.page === 'mylist') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
@@ -240,63 +240,59 @@ function inList(title) {
 
 function treeMaker(obj, type) {
   var firstcol = document.createElement('div');
+  firstcol.setAttribute('class', 'column-one-third');
+
   var cardContainer = document.createElement('div');
   firstcol.appendChild(cardContainer);
+
   var imgContainer = document.createElement('div');
+  imgContainer.setAttribute('class', 'img-container');
 
   cardContainer.appendChild(imgContainer);
-  var star = document.createElement('i');
-  if (inList(obj.title)) {
-    star.setAttribute('class', 'favorite-icon-on fas fa-star');
-  } else {
-    star.setAttribute('class', 'favorite-icon fas fa-star');
-  }
+  cardContainer.setAttribute('class', 'card-container');
+
+  var colInfo = document.createElement('div');
+  colInfo.setAttribute('class', 'column-info');
+  cardContainer.appendChild(colInfo);
 
   var img = document.createElement('img');
+  img.setAttribute('class', 'top-rated');
   img.setAttribute('alt', 'anime-img');
   img.setAttribute('src', obj.url);
   imgContainer.appendChild(img);
 
-  var colInfo = document.createElement('div');
-  cardContainer.appendChild(colInfo);
+  var star = document.createElement('i');
+  if (inList(obj.title)) {
+    star.setAttribute('class', 'favorite-icon-on fas fa-star');
+    if (type === 'singleAnime') {
+      star.textContent = ' Favorite';
+    }
+  } else {
+    star.setAttribute('class', 'favorite-icon fas fa-star');
+    if (type === 'singleAnime') {
+      star.textContent = ' Favorite';
+    }
+  }
   colInfo.appendChild(star);
+
   var title = document.createElement('h4');
+  title.setAttribute('class', 'anime-title-top');
   title.textContent = obj.title;
   colInfo.appendChild(title);
 
   var rank = document.createElement('h4');
+  rank.setAttribute('class', 'top-rank');
   rank.textContent = obj.rank;
   colInfo.appendChild(rank);
 
   var genre = document.createElement('h4');
+  genre.setAttribute('class', 'top-genre');
   genre.textContent = obj.genre;
   colInfo.appendChild(genre);
 
-  if (type === 'topAnime') {
-    firstcol.setAttribute('class', 'column-one-third');
-    cardContainer.setAttribute('class', 'card-container');
-    imgContainer.setAttribute('class', 'img-container');
-    img.setAttribute('class', 'top-rated');
-    colInfo.setAttribute('class', 'column-info');
-    title.setAttribute('class', 'anime-title-top');
-    rank.setAttribute('class', 'top-rank');
-    genre.setAttribute('class', 'top-genre');
-  }
-
-  if (type === 'ranAnime') {
-    firstcol.setAttribute('class', 'column-half');
-    cardContainer.setAttribute('class', 'card-container');
-    imgContainer.setAttribute('class', 'img-container big-img');
-    img.setAttribute('class', 'four-rand-imgs');
-    colInfo.setAttribute('class', 'column-info');
-    title.setAttribute('class', 'anime-title');
-    rank.setAttribute('class', 'random-rank');
-    genre.setAttribute('class', 'random-genre');
-  }
-
   if (type === 'singleAnime') {
     var secondInfo = document.createElement('div');
-    secondInfo.setAttribute('class', 'large-col-info');
+    secondInfo.setAttribute('class', 'large-mid-info');
     firstcol.appendChild(secondInfo);
 
     var leftSide = document.createElement('div');
@@ -357,7 +353,7 @@ function treeMaker(obj, type) {
     thirdInfo.appendChild(syn);
 
     firstcol.setAttribute('class', 'large-col');
-    cardContainer.setAttribute('class', 'large-card-container');
+    cardContainer.setAttribute('class', 'large-top-info');
     imgContainer.setAttribute('class', 'large-img-container');
     colInfo.setAttribute('class', 'large-column-info');
     img.setAttribute('class', 'large-img');
@@ -514,11 +510,6 @@ function handleFavorites(event) {
       objToPush.genre = event.target.closest('.column-one-third').querySelector('.top-genre').textContent;
       objToPush.rank = event.target.closest('.column-one-third').querySelector('.top-rank').textContent;
       objToPush.url = event.target.closest('.column-one-third').querySelector('.top-rated').getAttribute('src');
-    } else if (event.target.closest('.column-half')) {
-      objToPush.title = event.target.closest('.column-half').querySelector('.anime-title').textContent;
-      objToPush.genre = event.target.closest('.column-half').querySelector('.random-rank').textContent;
-      objToPush.rank = event.target.closest('.column-half').querySelector('.random-genre').textContent;
-      objToPush.url = event.target.closest('.column-half').querySelector('.four-rand-imgs').getAttribute('src');
     } else if (event.target.closest('.large-container')) {
       objToPush.title = event.target.closest('.large-container').querySelector('.large-title').textContent;
       objToPush.genre = event.target.closest('.large-container').querySelector('.large-rank').textContent;
@@ -531,8 +522,6 @@ function handleFavorites(event) {
     event.target.className = 'favorite-icon fas fa-star';
     if (event.target.closest('.column-one-third')) {
       deleteFromList(event.target.closest('.column-one-third').querySelector('.anime-title-top').textContent);
-    } else if (event.target.closest('.column-half')) {
-      deleteFromList(event.target.closest('.column-half').querySelector('.anime-title').textContent);
     } else if (event.target.closest('.large-container')) {
       deleteFromList(event.target.closest('.large-container').querySelector('.large-title').textContent);
     }
@@ -549,9 +538,6 @@ function handleAnime(event) {
     if (event.target.closest('.column-one-third')) {
       info.page = 'anime';
       checkPage(event.target.closest('.column-one-third').querySelector('.anime-title-top').textContent);
-    } else if (event.target.closest('.column-half')) {
-      info.page = 'anime';
-      checkPage(event.target.closest('.column-half').querySelector('.anime-title').textContent);
     }
   }
 }
