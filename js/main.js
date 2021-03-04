@@ -293,7 +293,7 @@ function treeMaker(obj, type) {
   if (type === 'singleAnime') {
     var secondInfo = document.createElement('div');
     secondInfo.setAttribute('class', 'large-mid-info');
-    firstcol.appendChild(secondInfo);
+    cardContainer.appendChild(secondInfo);
 
     var leftSide = document.createElement('div');
     leftSide.setAttribute('class', 'large-half');
