@@ -160,6 +160,7 @@ form {
   margin: 0;
   padding: 0.5rem;
   border-bottom: solid 1px gainsboro;
+  align-self: end;
 }
 
 .large-full-column {
@@ -315,7 +316,7 @@ img {
 
 @media screen and (min-width: 1366px) {
   .container {
-    width: 75vw;
+    width: 80vw;
     margin: auto;
   }
 
