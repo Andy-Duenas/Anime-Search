@@ -25,4 +25,5 @@ Link to demo: https://andy-duenas.github.io/ajax-project/
 
 ## Screenshots
 ![image](https://user-images.githubusercontent.com/54919527/110184739-7632c480-7dc5-11eb-8275-a5760067081c.png)
-![image](https://user-images.githubusercontent.com/54919527/110184802-9498c000-7dc5-11eb-8d1e-ad0628eacd1d.png)
+![image](https://user-images.githubusercontent.com/54919527/110184877-c3af3180-7dc5-11eb-801b-38462827c5d7.png)
+
