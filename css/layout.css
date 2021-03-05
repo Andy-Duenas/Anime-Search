@@ -159,8 +159,6 @@ form {
 .large-genre {
   margin: 0;
   padding: 0.5rem;
-  border-bottom: solid 1px gainsboro;
-  align-self: end;
 }
 
 .large-full-column {
@@ -186,22 +184,9 @@ img {
     flex-basis: calc(100% / 3);
   }
 
-  .large-half {
-    display: grid;
-  }
-
-  .large-column-info {
-    display: grid;
-  }
-
   .large-top-info {
     width: 100%;
     padding: 0 8px;
-  }
-
-  .large-mid-info,
-  .large-column-info {
-    height: 50%;
   }
 
   .large-img-container {
@@ -329,7 +314,6 @@ img {
   }
 
   .large-top-info {
-    height: 320px;
     padding: 0;
   }
 
