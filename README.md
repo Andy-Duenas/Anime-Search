@@ -2,11 +2,9 @@
 
 A dynamic HTML, CSS, and JavaScript solo project.
 
-Link: https://andy-duenas.github.io/ajax-project/
-
 ## Technologies Used
-* HTML
-* CSS
+* HTML5
+* CSS3
 * JavaScript
 
 ## Features
@@ -17,6 +15,5 @@ Link: https://andy-duenas.github.io/ajax-project/
 * User can add any anime to their favorites list.
 * User can see their favorite anime list.
 
-## Screenshots
-
-![image](https://user-images.githubusercontent.com/54919527/110182887-885f3380-7dc2-11eb-9ce9-b257b2a33e81.png)
+## Link
+Link: https://andy-duenas.github.io/ajax-project/
