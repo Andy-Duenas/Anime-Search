@@ -261,6 +261,10 @@ function treeMaker(obj, type) {
   img.setAttribute('src', obj.url);
   imgContainer.appendChild(img);
 
+  var starContainer = document.createElement('div');
+  starContainer.setAttribute('class', 'star-container');
+  colInfo.appendChild(starContainer);
+
   var star = document.createElement('i');
   if (inList(obj.title)) {
     star.setAttribute('class', 'favorite-icon-on fas fa-star');
@@ -273,7 +277,7 @@ function treeMaker(obj, type) {
       star.textContent = ' Favorite';
     }
   }
-  colInfo.appendChild(star);
+  starContainer.appendChild(star);
 
   var title = document.createElement('div');
   title.setAttribute('class', 'anime-title');

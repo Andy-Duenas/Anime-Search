@@ -86,12 +86,9 @@ form {
   padding-top: 10px;
 }
 
-.column-info > .favorite-icon {
-  margin-right: 3px;
-}
-
-.column-info > .favorite-icon-on {
-  margin-right: 3px;
+.large-column-info > .star-container {
+  width: 100%;
+  margin: 8px;
 }
 
 .anime-title {
@@ -103,6 +100,10 @@ form {
 .anime-rank,
 .anime-genre {
   display: none;
+}
+
+.first-word {
+  margin-right: 2px;
 }
 
 .column-load {
@@ -145,8 +146,6 @@ form {
 }
 
 .large-mid-info {
-  width: 100%;
-  flex-wrap: nowrap;
   display: flex;
 }
 
@@ -191,11 +190,8 @@ img {
     padding: 0 8px;
   }
 
+  .large-mid-info,
   .large-column-info {
-    height: 50%;
-  }
-
-  .large-mid-info {
     height: 50%;
   }
 
@@ -224,26 +220,26 @@ img {
     height: 22px;
   }
 
-  /* .anime-title,
-  .favorite-icon,
-  .favorite-icon-on {
+  .column-info > .star-container {
     width: 100%;
-    margin: 5px 0;
+    margin: 8px 0;
+    text-align: right;
   }
 
-  .favorite-icon,
-  .favorite-icon-on {
-    text-align: right;
-  } */
-
+  .anime-title,
   .anime-rank,
-  .anime-genre,
+  .anime-genre {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .anime-title {
+    font-size: 18px;
+  }
+
   .card-container {
     display: flex;
-    text-align: left;
-  }
-
-  .card-container {
     width: 100%;
     padding: 0;
   }
@@ -267,28 +263,11 @@ img {
     transform: translateX(0%);
   }
 
-  .large-info-line,
-  .large-title,
-  .large-rank,
-  .large-genre {
-    border-bottom: solid 1px gainsboro;
-  }
-
   .large-top-info {
     flex-direction: column;
-    width: 100%;
+    align-content: flex-start;
     height: 280px;
     padding: 0 8px;
-  }
-
-  .large-column-info {
-    width: 80%;
-    height: auto;
-  }
-
-  .large-mid-info {
-    width: 80%;
-    height: auto;
   }
 
   .large-img-container {
@@ -302,6 +281,11 @@ img {
     font-size: 35px;
   }
 
+  .large-mid-info,
+  .large-column-info {
+    width: 80%;
+  }
+
   .input-bar {
     width: 220px;
     height: 30px;
@@ -313,23 +297,26 @@ img {
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1366px) {
   .container {
-    width: 75vw;
+    width: 80vw;
     margin: auto;
+  }
+
+  .large-img-container {
+    height: 100%;
   }
 
   .column-one-third {
     flex-basis: calc(100% / 3);
   }
 
-  .large-img-container {
-    width: auto;
-    height: 100%;
-  }
-
   .large-top-info {
     height: 320px;
     padding: 0;
+  }
+
+  .large-mid-info {
+    width: 50%;
   }
 }
