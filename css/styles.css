@@ -23,6 +23,14 @@ header {
   font-weight: bold;
 }
 
+.title {
+  font-weight: bold;
+}
+
+.first-word {
+  font-weight: bold;
+}
+
 .input-bar,
 .search-button {
   border-radius: 4px;

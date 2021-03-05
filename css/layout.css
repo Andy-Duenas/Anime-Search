@@ -137,15 +137,11 @@ form {
 }
 
 .large-column-info > .favorite-icon {
-  width: 100%;
   padding: 0.5rem;
-  text-align: left;
 }
 
 .large-column-info > .favorite-icon-on {
-  width: 100%;
   padding: 0.5rem;
-  text-align: left;
 }
 
 .large-mid-info {
@@ -228,7 +224,7 @@ img {
     height: 22px;
   }
 
-  .anime-title,
+  /* .anime-title,
   .favorite-icon,
   .favorite-icon-on {
     width: 100%;
@@ -238,7 +234,7 @@ img {
   .favorite-icon,
   .favorite-icon-on {
     text-align: right;
-  }
+  } */
 
   .anime-rank,
   .anime-genre,
@@ -314,10 +310,6 @@ img {
   .search-button {
     width: 40px;
     height: 30px;
-  }
-
-  .column-one-third {
-    flex-basis: calc(120% / 3);
   }
 }
 
