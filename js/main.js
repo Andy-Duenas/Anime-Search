@@ -181,7 +181,7 @@ function removeAllChildren(parent) {
 }
 
 function setGenreRank(anime, index, objForTree, type) {
-  var genreList = 'Genre: ';
+  var genreList = '';
   for (var i = 0; i < anime.genres.length; i++) {
     if (i + 1 < anime.genres.length) {
       genreList += ' ' + anime.genres[i].name + ',';
@@ -189,7 +189,7 @@ function setGenreRank(anime, index, objForTree, type) {
       genreList += ' ' + anime.genres[i].name;
     }
   }
-  var studiosList = 'Studios: ';
+  var studiosList = '';
   for (var a = 0; a < anime.studios.length; a++) {
     if (a + 1 < anime.studios.length) {
       studiosList += ' ' + anime.studios[a].name + ',';
@@ -197,14 +197,14 @@ function setGenreRank(anime, index, objForTree, type) {
       studiosList += ' ' + anime.studios[a].name;
     }
   }
-  var opThemesList = 'Openings: ';
+  var opThemesList = '';
   for (var q = 0; q < anime.opening_themes.length; q++) {
     if (q + 1 < anime.opening_themes.length) {
       opThemesList += ' ' + anime.opening_themes[q] + ',';
     } else {
       opThemesList += ' ' + anime.opening_themes[q];
     }
-  } var endThemesList = 'Endings: ';
+  } var endThemesList = '';
   for (var p = 0; p < anime.ending_themes.length; p++) {
     if (p + 1 < anime.ending_themes.length) {
       endThemesList += ' ' + anime.ending_themes[p] + ',';
@@ -215,13 +215,13 @@ function setGenreRank(anime, index, objForTree, type) {
   objForTree.studios = studiosList;
   objForTree.op = opThemesList;
   objForTree.end = endThemesList;
-  objForTree.synopsis = 'Synopsis: ' + anime.synopsis;
-  objForTree.score = 'Score: ' + anime.score;
-  objForTree.rating = 'Rating: ' + anime.rating;
-  objForTree.premiered = 'Aired: ' + anime.premiered;
-  objForTree.duration = 'Length: ' + anime.duration;
-  objForTree.episodes = 'Episodes: ' + anime.episodes;
-  objForTree.rank = 'Rank: ' + anime.rank;
+  objForTree.synopsis = anime.synopsis;
+  objForTree.score = anime.score;
+  objForTree.rating = anime.rating;
+  objForTree.premiered = anime.premiered;
+  objForTree.duration = anime.duration;
+  objForTree.episodes = anime.episodes;
+  objForTree.rank = anime.rank;
   objForTree.genre = genreList;
   var topOfTree = treeMaker(objForTree, type);
   if (type === 'topAnime') { $topMainList.appendChild(topOfTree); }
@@ -275,20 +275,42 @@ function treeMaker(obj, type) {
   }
   colInfo.appendChild(star);
 
-  var title = document.createElement('h4');
-  title.setAttribute('class', 'anime-title-top');
-  title.textContent = obj.title;
+  var title = document.createElement('div');
+  title.setAttribute('class', 'anime-title');
   colInfo.appendChild(title);
 
-  var rank = document.createElement('h4');
-  rank.setAttribute('class', 'top-rank');
-  rank.textContent = obj.rank;
+  var titleFirst = document.createElement('span');
+  titleFirst.setAttribute('class', 'title');
+  titleFirst.textContent = obj.title;
+  title.appendChild(titleFirst);
+
+  var rank = document.createElement('div');
+  rank.setAttribute('class', 'anime-rank');
   colInfo.appendChild(rank);
 
-  var genre = document.createElement('h4');
-  genre.setAttribute('class', 'top-genre');
-  genre.textContent = obj.genre;
+  var rankFirst = document.createElement('span');
+  rankFirst.setAttribute('class', 'first-word');
+  rankFirst.textContent = 'Rank: ';
+  rank.appendChild(rankFirst);
+
+  var rankRest = document.createElement('span');
+  rankRest.setAttribute('class', 'rest-of-p');
+  rankRest.textContent = obj.rank;
+  rank.appendChild(rankRest);
+
+  var genre = document.createElement('div');
+  genre.setAttribute('class', 'anime-genre');
   colInfo.appendChild(genre);
+
+  var genreFirst = document.createElement('span');
+  genreFirst.setAttribute('class', 'first-word');
+  genreFirst.textContent = 'Genre: ';
+  genre.appendChild(genreFirst);
+
+  var genreRest = document.createElement('span');
+  genreRest.setAttribute('class', 'rest-of-p');
+  genreRest.textContent = obj.genre;
+  genre.appendChild(genreRest);
 
   if (type === 'singleAnime') {
     var secondInfo = document.createElement('div');
@@ -303,54 +325,135 @@ function treeMaker(obj, type) {
     rightSide.setAttribute('class', 'large-half');
     secondInfo.appendChild(rightSide);
 
-    var studio = document.createElement('h4');
-    studio.textContent = obj.studios;
-    studio.setAttribute('class', 'large-h4');
+    var studio = document.createElement('div');
+    studio.setAttribute('class', 'large-info-line');
     leftSide.appendChild(studio);
 
-    var scoring = document.createElement('h4');
-    scoring.textContent = obj.score;
-    scoring.setAttribute('class', 'large-h4');
+    var studioFirst = document.createElement('span');
+    studioFirst.setAttribute('class', 'first-word');
+    studioFirst.textContent = 'Studios: ';
+    studio.appendChild(studioFirst);
+
+    var studioRest = document.createElement('span');
+    studioRest.setAttribute('class', 'rest-of-p');
+    studioRest.textContent = obj.studios;
+    studio.appendChild(studioRest);
+
+    var scoring = document.createElement('div');
+    scoring.setAttribute('class', 'large-info-line');
     leftSide.appendChild(scoring);
 
-    var rates = document.createElement('h4');
-    rates.textContent = obj.rating;
-    rates.setAttribute('class', 'large-h4');
+    var scoreFirst = document.createElement('span');
+    scoreFirst.setAttribute('class', 'first-word');
+    scoreFirst.textContent = 'Score: ';
+    scoring.appendChild(scoreFirst);
+
+    var scoreRest = document.createElement('span');
+    scoreRest.setAttribute('class', 'rest-of-p');
+    scoreRest.textContent = obj.score;
+    scoring.appendChild(scoreRest);
+
+    var rates = document.createElement('div');
+    rates.setAttribute('class', 'large-info-line');
     leftSide.appendChild(rates);
 
-    var numEp = document.createElement('h4');
-    numEp.textContent = obj.episodes;
-    numEp.setAttribute('class', 'large-h4');
+    var ratesFirst = document.createElement('span');
+    ratesFirst.setAttribute('class', 'first-word');
+    ratesFirst.textContent = 'Rated: ';
+    rates.appendChild(ratesFirst);
+
+    var ratesRest = document.createElement('span');
+    ratesRest.setAttribute('class', 'rest-of-p');
+    ratesRest.textContent = obj.rating;
+    rates.appendChild(ratesRest);
+
+    var numEp = document.createElement('div');
+    numEp.setAttribute('class', 'large-info-line');
     rightSide.appendChild(numEp);
 
-    var premiereDate = document.createElement('h4');
-    premiereDate.textContent = obj.premiered;
-    premiereDate.setAttribute('class', 'large-h4');
+    var numEpFirst = document.createElement('span');
+    numEpFirst.setAttribute('class', 'first-word');
+    numEpFirst.textContent = 'Episodes: ';
+    numEp.appendChild(numEpFirst);
+
+    var numEpRest = document.createElement('span');
+    numEpRest.setAttribute('class', 'rest-of-p');
+    numEpRest.textContent = obj.episodes;
+    numEp.appendChild(numEpRest);
+
+    var premiereDate = document.createElement('div');
+    premiereDate.setAttribute('class', 'large-info-line');
     rightSide.appendChild(premiereDate);
 
-    var lengthEp = document.createElement('h4');
-    lengthEp.textContent = obj.duration;
-    lengthEp.setAttribute('class', 'large-h4');
+    var premDateFirst = document.createElement('span');
+    premDateFirst.setAttribute('class', 'first-word');
+    premDateFirst.textContent = 'Date: ';
+    premiereDate.appendChild(premDateFirst);
+
+    var premDateRest = document.createElement('span');
+    premDateRest.setAttribute('class', 'rest-of-p');
+    premDateRest.textContent = obj.premiered;
+    premiereDate.appendChild(premDateRest);
+
+    var lengthEp = document.createElement('div');
+    lengthEp.setAttribute('class', 'large-info-line');
     rightSide.appendChild(lengthEp);
+
+    var lengthFirst = document.createElement('span');
+    lengthFirst.setAttribute('class', 'first-word');
+    lengthFirst.textContent = 'Duration: ';
+    lengthEp.appendChild(lengthFirst);
+
+    var lengthRest = document.createElement('span');
+    lengthRest.setAttribute('class', 'rest-of-p');
+    lengthRest.textContent = obj.duration;
+    lengthEp.appendChild(lengthRest);
 
     var thirdInfo = document.createElement('div');
     thirdInfo.setAttribute('class', 'large-full-column');
     firstcol.appendChild(thirdInfo);
 
-    var op = document.createElement('h4');
-    op.textContent = obj.op;
-    op.setAttribute('class', 'large-h4');
+    var op = document.createElement('div');
+    op.setAttribute('class', 'large-info-line');
     thirdInfo.appendChild(op);
 
-    var end = document.createElement('h4');
-    end.textContent = obj.end;
-    end.setAttribute('class', 'large-h4');
+    var opFirst = document.createElement('span');
+    opFirst.setAttribute('class', 'first-word');
+    opFirst.textContent = 'Opening Themes: ';
+    op.appendChild(opFirst);
+
+    var opRest = document.createElement('span');
+    opRest.setAttribute('class', 'rest-of-p');
+    opRest.textContent = obj.op;
+    op.appendChild(opRest);
+
+    var end = document.createElement('div');
+    end.setAttribute('class', 'large-info-line');
     thirdInfo.appendChild(end);
 
-    var syn = document.createElement('h4');
-    syn.textContent = obj.synopsis;
-    syn.setAttribute('class', 'large-h4');
+    var endFirst = document.createElement('span');
+    endFirst.setAttribute('class', 'first-word');
+    endFirst.textContent = 'Ending Themes: ';
+    end.appendChild(endFirst);
+
+    var endRest = document.createElement('span');
+    endRest.setAttribute('class', 'rest-of-p');
+    endRest.textContent = obj.end;
+    end.appendChild(endRest);
+
+    var syn = document.createElement('div');
+    syn.setAttribute('class', 'large-info-line');
     thirdInfo.appendChild(syn);
+
+    var synFirst = document.createElement('span');
+    synFirst.setAttribute('class', 'first-word');
+    synFirst.textContent = 'Synopsis: ';
+    syn.appendChild(synFirst);
+
+    var synRest = document.createElement('span');
+    synRest.setAttribute('class', 'rest-of-p');
+    synRest.textContent = obj.synopsis;
+    syn.appendChild(synRest);
 
     firstcol.setAttribute('class', 'large-col');
     cardContainer.setAttribute('class', 'large-top-info');
@@ -506,9 +609,9 @@ function handleFavorites(event) {
   var objToPush = {};
   if (event.target.className === 'favorite-icon fas fa-star') {
     if (event.target.closest('.column-one-third')) {
-      objToPush.title = event.target.closest('.column-one-third').querySelector('.anime-title-top').textContent;
-      objToPush.genre = event.target.closest('.column-one-third').querySelector('.top-genre').textContent;
-      objToPush.rank = event.target.closest('.column-one-third').querySelector('.top-rank').textContent;
+      objToPush.title = event.target.closest('.column-one-third').querySelector('.anime-title').textContent;
+      objToPush.genre = event.target.closest('.column-one-third').querySelector('.anime-genre').textContent;
+      objToPush.rank = event.target.closest('.column-one-third').querySelector('.anime-rank').textContent;
       objToPush.url = event.target.closest('.column-one-third').querySelector('.top-rated').getAttribute('src');
     } else if (event.target.closest('.large-container')) {
       objToPush.title = event.target.closest('.large-container').querySelector('.large-title').textContent;
@@ -521,7 +624,7 @@ function handleFavorites(event) {
   } else if (event.target.className === 'favorite-icon-on fas fa-star') {
     event.target.className = 'favorite-icon fas fa-star';
     if (event.target.closest('.column-one-third')) {
-      deleteFromList(event.target.closest('.column-one-third').querySelector('.anime-title-top').textContent);
+      deleteFromList(event.target.closest('.column-one-third').querySelector('.anime-title').textContent);
     } else if (event.target.closest('.large-container')) {
       deleteFromList(event.target.closest('.large-container').querySelector('.large-title').textContent);
     }
@@ -537,7 +640,7 @@ function handleAnime(event) {
   if (event.target.className !== 'favorite-icon fas fa-star' && event.target.className !== 'favorite-icon-on fas fa-star') {
     if (event.target.closest('.column-one-third')) {
       info.page = 'anime';
-      checkPage(event.target.closest('.column-one-third').querySelector('.anime-title-top').textContent);
+      checkPage(event.target.closest('.column-one-third').querySelector('.anime-title').textContent);
     }
   }
 }

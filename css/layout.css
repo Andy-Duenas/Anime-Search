@@ -94,14 +94,14 @@ form {
   margin-right: 3px;
 }
 
-.anime-title-top {
+.anime-title {
   margin: 0;
   height: 20px;
   overflow: hidden;
 }
 
-.top-rank,
-.top-genre {
+.anime-rank,
+.anime-genre {
   display: none;
 }
 
@@ -158,7 +158,7 @@ form {
   width: 50%;
 }
 
-.large-h4,
+.large-info-line,
 .large-title,
 .large-rank,
 .large-genre {
@@ -188,7 +188,6 @@ img {
 
   .column-one-third {
     flex-basis: calc(100% / 3);
-    margin: auto;
   }
 
   .large-top-info {
@@ -229,7 +228,7 @@ img {
     height: 22px;
   }
 
-  .anime-title-top,
+  .anime-title,
   .favorite-icon,
   .favorite-icon-on {
     width: 100%;
@@ -241,8 +240,8 @@ img {
     text-align: right;
   }
 
-  .top-rank,
-  .top-genre,
+  .anime-rank,
+  .anime-genre,
   .card-container {
     display: flex;
     text-align: left;
@@ -272,7 +271,7 @@ img {
     transform: translateX(0%);
   }
 
-  .large-h4,
+  .large-info-line,
   .large-title,
   .large-rank,
   .large-genre {
