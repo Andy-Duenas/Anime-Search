@@ -1,6 +1,6 @@
 # AnimeSearch
 
-A dynamic HTML, CSS, and JavaScript solo project.
+A dynamic HTML, CSS, and JavaScript solo project that uses the API https://jikan.moe/ (Jikan).
 
 ## Technologies Used
 * HTML5
