@@ -1,6 +1,7 @@
 # AnimeSearch
 
-A dynamic HTML, CSS, and JavaScript solo project that uses the API https://jikan.moe/ (Jikan). The application allows a user to traverse though lists of different genres of anime or search for a specific show.
+A dynamic HTML, CSS, and JavaScript solo project that uses the API https://jikan.moe/ (Jikan). The application allows a user to traverse 
+though lists of different genres of anime or search for a specific show.
 
 Link to demo: https://andy-duenas.github.io/ajax-project/
 
