@@ -185,6 +185,14 @@ img {
     flex-basis: calc(100% / 3);
   }
 
+  .large-half {
+    display: grid;
+  }
+
+  .large-column-info {
+    display: grid;
+  }
+
   .large-top-info {
     width: 100%;
     padding: 0 8px;
@@ -281,9 +289,17 @@ img {
     font-size: 35px;
   }
 
-  .large-mid-info,
+  .large-img-container {
+    width: 230px;
+    height: 320px;
+  }
+
+  .large-top-info {
+    height: 320px;
+  }
+
   .large-column-info {
-    width: 80%;
+    width: 50%;
   }
 
   .input-bar {
@@ -299,7 +315,7 @@ img {
 
 @media screen and (min-width: 1366px) {
   .container {
-    width: 80vw;
+    width: 75vw;
     margin: auto;
   }
 
