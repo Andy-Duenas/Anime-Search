@@ -7,36 +7,48 @@
 }
 
 .row {
-  display: flex;
   width: 100%;
-  text-align: center;
+  display: flex;
 }
 
 .wrap-row {
-  display: flex;
   flex-wrap: wrap;
 }
 
 .column-full,
-form {
+form,
+h2 {
   width: 100%;
+  padding: 0 5px;
+}
+
+form {
+  font-size: 0;
 }
 
 .column-half-h {
   display: flex;
   align-items: center;
-  justify-content: center;
   width: 100%;
 }
 
+.left-half {
+  text-align: left;
+}
+
+.right-half {
+  text-align: right;
+}
+
 .input-bar {
-  width: 70%;
-  height: 35%;
+  width: 110px;
+  height: 18px;
 }
 
 .search-button {
-  width: 22%;
-  height: 35%;
+  width: 35px;
+  height: 18px;
+  margin-right: 5px;
 }
 
 .button-row {
@@ -45,63 +57,53 @@ form {
   margin-bottom: 10px;
 }
 
-.top-rank,
-.top-genre,
-.random-rank,
-.random-genre {
-  display: none;
-}
-
-.column-info {
-  width: 100%;
-  height: 100%;
-}
-
 .column-one-third {
-  padding: 8px;
+  display: flex;
+  justify-content: center;
   flex-basis: calc(100% / 2);
-  height: 100%;
-}
-
-.column-half {
-  text-align: center;
-  width: 50%;
-  height: 100%;
-  padding: 15px;
+  padding: 5px;
 }
 
 .card-container {
-  padding: 0.5rem;
-  width: 100%;
+  border: 1px gainsboro solid;
+  width: 150px;
+  padding: 8px;
 }
 
-.anime-title,
-.anime-title-top {
-  margin: 10px 0 0 0;
-  height: 20px;
-  overflow: hidden;
-}
-
-.img-container,
-.big-img {
+.img-container {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   object-fit: contain;
-  width: 120px;
-  height: 150px;
-}
-
-.big-img {
   width: 130px;
-  height: 200px;
+  height: 190px;
 }
 
-.favorite-icon,
-.favorite-icon-on {
-  position: absolute;
-  top: 5px;
-  right: 5px;
+.column-info {
+  display: flex;
+  width: 120px;
+  margin: auto;
+  padding-top: 10px;
+}
+
+.large-column-info > .star-container {
+  width: 100%;
+  margin: 8px;
+}
+
+.anime-title {
+  margin: 0;
+  height: 20px;
+  overflow: hidden;
+}
+
+.anime-rank,
+.anime-genre {
+  display: none;
+}
+
+.first-word {
+  margin-right: 2px;
 }
 
 .column-load {
@@ -114,82 +116,208 @@ form {
   font-size: 50px;
 }
 
+.large-col {
+  width: 100%;
+  border: solid gainsboro 1px;
+}
+
+.large-top-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.large-img-container {
+  position: relative;
+  object-fit: contain;
+  width: 150px;
+  height: 225px;
+}
+
+.large-column-info {
+  flex-basis: calc(100% / 2);
+}
+
+.large-column-info > .favorite-icon {
+  padding: 0.5rem;
+}
+
+.large-column-info > .favorite-icon-on {
+  padding: 0.5rem;
+}
+
+.large-mid-info {
+  display: flex;
+}
+
+.large-half {
+  width: 50%;
+}
+
+.large-info-line,
+.large-title,
+.large-rank,
+.large-genre {
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.large-full-column {
+  width: 100%;
+}
+
 img {
   width: 100%;
   height: 100%;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 568px) {
   .input-bar {
-    width: 30%;
+    width: 150px;
+    height: 22px;
   }
 
   .search-button {
-    justify-content: center;
-    width: 8%;
+    height: 22px;
   }
 
-  .top-rank,
-  .top-genre,
-  .random-rank,
-  .random-genre,
+  .column-one-third {
+    flex-basis: calc(100% / 3);
+  }
+
+  .large-top-info {
+    width: 100%;
+    padding: 0 8px;
+  }
+
+  .large-img-container {
+    width: 190px;
+    height: 240px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 30px;
+  }
+
+  .menu-button {
+    font-size: 16px;
+  }
+
+  .input-bar {
+    width: 180px;
+    height: 22px;
+  }
+
+  .search-button {
+    width: 30px;
+    height: 22px;
+  }
+
+  .column-info > .star-container {
+    width: 100%;
+    margin: 8px 0;
+    text-align: right;
+  }
+
   .anime-title,
-  .anime-title-top,
+  .anime-rank,
+  .anime-genre {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .anime-title {
+    font-size: 18px;
+  }
+
   .card-container {
     display: flex;
-    text-align: left;
-  }
-
-  .card-container {
-    padding: 1rem;
+    width: 100%;
+    padding: 0;
   }
 
   .column-info {
-    text-align: left;
-    width: 50%;
-    padding: 0 1rem;
+    display: block;
+    width: 60%;
+    margin: 0;
+    padding: 0 0.5rem 0 0.5rem;
   }
 
-  .column-one-third,
-  .column-half {
-    display: flex;
+  .column-one-third {
+    flex-basis: calc(100% / 2);
     padding: 12px;
   }
 
   .img-container {
     width: 200px;
     height: 280px;
-  }
-
-  .img-container,
-  .big-img {
     left: 0;
     transform: translateX(0%);
+  }
+
+  .large-top-info {
+    flex-direction: column;
+    align-content: flex-start;
+    height: 280px;
+    padding: 0 8px;
+  }
+
+  .large-img-container {
+    width: 200px;
+    height: 280px;
   }
 }
 
 @media screen and (min-width: 1024px) {
+  h2 {
+    font-size: 35px;
+  }
+
+  .large-img-container {
+    width: 230px;
+    height: 320px;
+  }
+
+  .large-top-info {
+    height: 320px;
+  }
+
+  .large-column-info {
+    width: 50%;
+  }
+
   .input-bar {
-    width: 30%;
+    width: 220px;
+    height: 30px;
   }
 
   .search-button {
-    justify-content: center;
-    width: 6%;
-  }
-
-  .column-one-third {
-    flex-basis: calc(150% / 3);
+    width: 40px;
+    height: 30px;
   }
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1366px) {
   .container {
-    width: 75vw;
+    width: 80vw;
     margin: auto;
+  }
+
+  .large-img-container {
+    height: 100%;
   }
 
   .column-one-third {
     flex-basis: calc(100% / 3);
+  }
+
+  .large-top-info {
+    padding: 0;
+  }
+
+  .large-mid-info {
+    width: 50%;
   }
 }

@@ -5,26 +5,8 @@ body {
 header {
   font-family: 'Philosopher', sans-serif;
   font-style: italic;
-  background-color: #68a9ff;
-}
-
-.input-bar,
-.search-button {
-  border-radius: 4px;
-  border: solid black 1px;
-}
-
-.favorite-icon {
-  cursor: pointer;
-}
-
-.favorite-icon-on {
-  cursor: pointer;
-  color: yellow;
-}
-
-.input-bar {
-  outline: none;
+  background-color: rgb(0, 105, 158);
+  color: white;
 }
 
 .menu-button,
@@ -34,13 +16,46 @@ header {
 }
 
 .menu-button {
+  color: white;
   background: none;
   border: none;
   transition: color  0.2s ease-in-out;
   font-weight: bold;
 }
 
-.card-container {
+.title {
+  font-weight: bold;
+}
+
+.first-word {
+  font-weight: bold;
+}
+
+.input-bar,
+.search-button {
+  border-radius: 4px;
+  border: solid darkgray 1px;
+}
+
+.favorite-icon {
+  cursor: pointer;
+  color: gray;
+}
+
+.favorite-icon-on {
+  cursor: pointer;
+  color: yellow;
+  text-shadow: 0 0 2px rgb(30, 30, 30);
+}
+
+.input-bar {
+  outline: none;
+}
+
+.card-container,
+.large-top-info,
+.large-full-column,
+.large-mid-info {
   background-color: whitesmoke;
 }
 
@@ -48,17 +63,9 @@ header {
   color: yellow;
 }
 
-.column-one-third {
-  background-color: white;
-}
-
 @media screen and (min-width: 1024px) {
-  .menu-button {
-    font-size: 100%;
-  }
-
-  .title {
-    font-size: 30px;
-    margin: 1rem 0;
+  .favorite-icon:hover {
+    color: yellow;
+    text-shadow: 0 0 2px rgb(30, 30, 30);
   }
 }
