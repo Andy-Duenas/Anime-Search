@@ -20,4 +20,4 @@ Link to demo: https://andy-duenas.github.io/ajax-project/
 ## What I learned
 * Planning and wireframing will help save hours of time for the coding process.
 * You have to adapt to the unforseen problems and be flexible to solve those problems.
-* Having the proper HTML structure and CSS to go along with it will make JavaScript portion much easier.
+* Having the proper HTML structure and CSS to go along with it will make the JavaScript portion of manipulating the DOM tree much easier.
