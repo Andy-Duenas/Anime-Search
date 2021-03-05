@@ -2,6 +2,8 @@
 
 A dynamic HTML, CSS, and JavaScript solo project.
 
+Link: https://andy-duenas.github.io/ajax-project/
+
 ## Technologies Used
 * HTML
 * CSS
