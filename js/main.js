@@ -121,7 +121,7 @@ function checkPage(text) {
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'random-header';
     $singleAnime.checkPage = 'hidden';
-    getTopRated(6, 6);
+    getTopRated(9, 9);
   } else if (info.page === 'random') {
     removeAllChildren($topMainList);
     removeAllChildren($randomMainList);
@@ -148,9 +148,13 @@ function checkPage(text) {
     $topAnimeHeader.className = 'top-header';
     $randomAnimeHeader.className = 'hidden';
     $singleAnime.checkPage = 'hidden';
-    for (var i = 0; i < info.entries.length; i++) {
-      var topOfTree = treeMaker(info.entries[i], 'topAnime');
-      $topMainList.appendChild(topOfTree);
+    if (info.entries.length !== 0) {
+      for (var i = 0; i < info.entries.length; i++) {
+        var topOfTree = treeMaker(info.entries[i], 'topAnime');
+        $topMainList.appendChild(topOfTree);
+      }
+    } else {
+      $topAnimeHeader.textContent = 'You Currently Have No Saved Games';
     }
   } else if (info.page === 'anime') {
     removeAllChildren($topMainList);
